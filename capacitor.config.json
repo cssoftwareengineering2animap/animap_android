@@ -1,0 +1,13 @@
+{
+  "appId": "com.animap.login",
+  "appName": "login",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "dist/animap",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {}
+}

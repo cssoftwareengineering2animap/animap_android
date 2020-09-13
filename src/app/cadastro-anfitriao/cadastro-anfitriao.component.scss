@@ -1,0 +1,58 @@
+
+.titulo {
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: 82px;
+}
+
+@font-face {
+    font-family: "Gotham";
+    src: url("../Gotham-Medium.woff")
+}
+
+
+#main {
+    font-family: Gotham;
+}
+
+.capsula-form {
+    margin: 0px 16px;
+    padding: 32px 0px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    max-height: 280px;
+    overflow-x: hidden; 
+    overflow-y: auto;
+}
+
+.marb {
+    margin-bottom: 48px;
+}
+
+input, input:focus {
+    background: none;
+    border: none;
+    border-radius: 0px;
+    border-bottom: 2px solid #302d2d;
+    box-shadow: none;
+}
+
+input:focus {
+    border-bottom: 4px solid #302d2d;
+}
+
+::placeholder {
+    color: #968e8e;;
+}
+
+#btnCadastrar {
+    border-radius: 200px;
+    padding: 12px;
+    width: 85%;
+    border-bottom: 6px solid #212222;
+
+}
+
+.form-check {
+    font-size: 14px;
+    padding: 0;
+}

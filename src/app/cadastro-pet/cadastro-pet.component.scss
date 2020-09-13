@@ -1,0 +1,62 @@
+
+.marb {
+    margin-bottom: 48px;
+}
+
+@font-face {
+    font-family: "Gotham";
+    src: url("../Gotham-Medium.woff")
+}
+
+#main {
+    font-family: Gotham;
+}
+
+::placeholder {
+    color: #968e8e;;
+}
+
+#btnCadastrar {
+    border-radius: 200px;
+    padding: 12px;
+    width: 85%;
+    border-bottom: 6px solid #212222;
+
+}
+
+.head {
+    padding: 7px 20px;
+    font-size: 22px;
+}
+
+.head h5 {
+    margin: 0;
+    padding: 0;
+}
+
+.image {
+    height:86px;
+    width: 86px;
+    border: 2px dashed;
+    border-radius: 100px;
+}
+
+label {
+    color: #968e8e;
+}
+
+fa-icon {
+    font-size: 42px;
+}
+
+.head fa-icon {
+    font-size: 26px;
+}
+
+html body {
+    background-color: red !important;
+}
+
+body {
+    background-color: red !important;
+}
