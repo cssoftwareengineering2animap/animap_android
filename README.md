@@ -1,27 +1,12 @@
 # Animap
+## Tela de Login
+![login](https://user-images.githubusercontent.com/47941429/93034684-41f9fa80-f611-11ea-96c6-0c6814e41a8d.png)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.1.
+## Tela de Cadastro Básico
+![cadastro-anfitriao](https://user-images.githubusercontent.com/47941429/93034677-3dcddd00-f611-11ea-847c-69627b09377e.png)
 
-## Development server
+## Tela de Cadastro Para Anfitriões
+![cadastro](https://user-images.githubusercontent.com/47941429/93034673-39a1bf80-f611-11ea-91d3-0f9bef124bbb.png)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Tela de Cadastro de Pets
+![cadastro-pet](https://user-images.githubusercontent.com/47941429/93034682-40303700-f611-11ea-9209-00fcab4c8900.png)
