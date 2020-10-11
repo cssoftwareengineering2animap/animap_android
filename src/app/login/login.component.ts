@@ -1,57 +1,69 @@
-import {  Router } from '@angular/router';
-import { Cadastro } from './../cadastro/cadastro.model';
-import { LoginService } from './login.service';
-import { AfterViewInit, Component, Directive, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';3
-import * as operadores from 'rxjs/operators';
+import { Router } from "@angular/router"
+import {
+  AfterViewInit,
+  Component,
+  Directive,
+  OnDestroy,
+  OnInit,
+} from "@angular/core"
+import { FormGroup, FormBuilder, Validators } from "@angular/forms"
+import * as operadores from "rxjs/operators"
+import { LoginService } from "./login.service"
+import { Cadastro } from "../cadastro/cadastro.model"
+
+3
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
+  loginForm: FormGroup
 
-  loginForm: FormGroup;
-  public existeUsuario : boolean;
-  public clicked = false;
-  public pesquisando = false;
+  public existeUsuario: boolean
 
-  private usuarios: Cadastro[];
+  public clicked = false
 
-  constructor(private fb: FormBuilder,
-              private loginService: LoginService,
-              private route: Router) { }
+  public pesquisando = false
+
+  private usuarios: Cadastro[]
+
+  constructor(
+    private fb: FormBuilder,
+    private loginService: LoginService,
+    private route: Router
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      email : this.fb.control('', Validators.required),
-      senha : this.fb.control('', Validators.required)
+      email: this.fb.control("", Validators.required),
+      senha: this.fb.control("", Validators.required),
     })
-    this.loginService.buscaUsuario().subscribe(resp => this.usuarios = resp);
-    this.addClass();
+    this.loginService.buscaUsuario().subscribe(resp => (this.usuarios = resp))
+    this.addClass()
   }
 
-  ngAfterViewInit() {
-  }
+  ngAfterViewInit() {}
 
   clickedToFalse() {
-    this.clicked = false;
+    this.clicked = false
   }
 
   onSubmit() {
-    this.existeUsuario = this.usuarios.some(p => p.email == this.loginForm.get('email').value 
-                        && p.senha == this.loginForm.get('senha').value);
-    this.clicked = true;
+    this.existeUsuario = this.usuarios.some(
+      p =>
+        p.email == this.loginForm.get("email").value &&
+        p.senha == this.loginForm.get("senha").value
+    )
+    this.clicked = true
 
-    if(this.existeUsuario) {
-      setTimeout(() => 
-        this.route.navigate(['/home']) , 1500);
+    if (this.existeUsuario) {
+      setTimeout(() => this.route.navigate(["/home"]), 1500)
     }
   }
 
   addClass() {
-    document.querySelector('body').style.background = '#ffc107';
+    document.querySelector("body").style.background = "#ffc107"
   }
-  
 }

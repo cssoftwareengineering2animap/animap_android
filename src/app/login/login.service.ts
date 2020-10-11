@@ -1,15 +1,13 @@
-import { API_URL } from './../api-url';
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { HttpClient } from "@angular/common/http"
+import { Injectable } from "@angular/core"
+import { Observable } from "rxjs"
+import { API_URL } from "../api-url"
 
 @Injectable()
-
 export class LoginService {
-    constructor(private http: HttpClient) {}
-    
+  constructor(private http: HttpClient) {}
 
-    public buscaUsuario() : Observable<any> {
-        return this.http.get(`${API_URL}/usuarios`);
-    }
+  public buscaUsuario(): Observable<any> {
+    return this.http.get(`${API_URL}/usuarios`)
+  }
 }
