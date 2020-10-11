@@ -30,8 +30,7 @@
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
-            "scripts": [
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -124,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "Animap"
+    }
+  },
+  "defaultProject": "Animap",
+  "cli": {
+    "analytics": "8b199ac5-1cfe-4fb4-8541-6de64fef6b03"
+  }
 }
