@@ -1,0 +1,182 @@
+<div class="bg-warning h-100" id="main">
+  <div class="cadastro container">
+    <div class="logo d-flex flex-column">
+      <h2 class="text-center titulo">
+        <span class="text-dark">Ani</span><span class="text-white">map</span>
+      </h2>
+    </div>
+    <div class="text-center text-white">
+      <p>Cadastre-se! Faça do seu pet o animal mais feliz do mundo!</p>
+    </div>
+    <div class="info-usuario">
+      <form
+        class="d-flex flex-column"
+        [formGroup]="registrationForm"
+        (ngSubmit)="onSubmit()"
+      >
+        <div class="capsula-form">
+          <div class="form-group marb">
+            <input
+              #nome
+              class="form-control w-75 mx-auto text-center"
+              formControlName="name"
+              type="text"
+              placeholder="Nome"
+              style="margin-bottom: -10px"
+            />
+            <div
+              *ngIf="
+                registrationForm.get('name').invalid &&
+                registrationForm.get('name').dirty &&
+                registrationForm.get('name').touched
+              "
+              class="alert alert-danger text-center"
+            >
+              <div *ngIf="registrationForm.get('name').hasError('required')">
+                O nome é obrigatório.
+              </div>
+              <div *ngIf="registrationForm.get('name').hasError('minlength')">
+                O nome deve ter pelo menos 6 letras.
+              </div>
+            </div>
+          </div>
+          <div class="form-group marb">
+            <input
+              class="form-control w-75 mx-auto text-center"
+              formControlName="email"
+              type="email"
+              placeholder="Preencha seu e-mail"
+              style="margin-bottom: -10px"
+            />
+            <div
+              *ngIf="
+                registrationForm.get('email').invalid &&
+                registrationForm.get('email').dirty &&
+                registrationForm.get('email').touched
+              "
+              class="alert alert-danger text-center"
+            >
+              <div *ngIf="registrationForm.get('email').hasError('required')">
+                O email é obrigatório.
+              </div>
+              <div *ngIf="registrationForm.get('email').hasError('email')">
+                Formato de e-mail não adequado.
+              </div>
+            </div>
+          </div>
+          <div class="form-group marb">
+            <input
+              class="form-control w-75 mx-auto text-center"
+              formControlName="password"
+              type="password"
+              placeholder="Crie uma senha"
+            />
+            <div
+              *ngIf="
+                registrationForm.get('password').invalid &&
+                registrationForm.get('password').dirty &&
+                registrationForm.get('password').touched
+              "
+              class="alert alert-danger text-center"
+            >
+              <div
+                *ngIf="registrationForm.get('password').hasError('required')"
+              >
+                A senha é obrigatória.
+              </div>
+              <div
+                *ngIf="registrationForm.get('password').hasError('minlength')"
+              >
+                A senha deve ter pelo menos 6 letras.
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input
+              class="form-control w-75 mx-auto text-center"
+              formControlName="passwordConfirmation"
+              type="password"
+              placeholder="Confirme sua senha"
+            />
+            <div
+              *ngIf="
+                registrationForm.get('passwordConfirmation').invalid &&
+                registrationForm.get('passwordConfirmation').dirty &&
+                registrationForm.get('passwordConfirmation').touched
+              "
+              class="alert alert-danger text-center"
+            >
+              <div
+                *ngIf="
+                  registrationForm
+                    .get('passwordConfirmation')
+                    .hasError('required')
+                "
+              >
+                Campo obrigatório
+              </div>
+              <div
+                *ngIf="
+                  registrationForm
+                    .get('passwordConfirmation')
+                    .hasError('minlength')
+                "
+              >
+                A senha deve ter pelo menos 6 letras.
+              </div>
+            </div>
+            <div
+              *ngIf="
+                registrationForm.get('passwordConfirmation').dirty &&
+                registrationForm.get('passwordConfirmation').touched &&
+                !passwordsMatch()
+              "
+              class="alert alert-danger text-center"
+            >
+              <div>Senhas devem ser iguais.</div>
+            </div>
+
+            <div *ngIf="errorMessage" class="alert alert-danger text-center">
+              <div>{{ errorMessage }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-check text-center mt-3">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            id="termos"
+            formControlName="termos"
+          />
+          <label class="form-check-label text-primary" for="termos">
+            Li e concordo com o termos de uso
+          </label>
+          <p class="text-center text-primary text-underline m-0 mt-1">
+            <u>Termos de Uso</u>
+          </p>
+        </div>
+        <button
+          [disabled]="registrationForm.invalid || !passwordsMatch()"
+          type="submit"
+          class="btn btn-dark text-light align-self-center mt-3"
+          id="btnCadastrar"
+        >
+          Cadastrar
+        </button>
+      </form>
+    </div>
+    <div class="cadastroAnfitriao text-center">
+      <p class="text-center m-0 mt-2 text-white mb-2">
+        Pretende se tornar um <strong>Anfitrião</strong>?
+      </p>
+      <a
+        class="m-0 text-primary mt-2"
+        routerLink="/cadastro-anfitriao"
+        routerLinkActive="active"
+        ><u><strong>Clique aqui!</strong></u></a
+      >
+    </div>
+  </div>
+</div>

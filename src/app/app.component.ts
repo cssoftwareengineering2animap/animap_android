@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Directive, OnDestroy } from "@angular/core"
+import { Component } from "@angular/core"
 import { faCoffee } from "@fortawesome/free-solid-svg-icons"
 
 @Component({
