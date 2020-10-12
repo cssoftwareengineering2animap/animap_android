@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core"
 import { FormGroup, FormBuilder, Validators } from "@angular/forms"
-import { LoginService } from "./login.service"
+import { Router } from "@angular/router"
+import { Failure } from "../../../../core/types/failure"
+import { LoginUseCase } from "../../../../domain/use_cases/user/login/login_use_case"
 
 @Component({
   selector: "app-login",
@@ -10,32 +12,40 @@ import { LoginService } from "./login.service"
 export class LoginComponent implements OnInit {
   loginForm: FormGroup
 
+  errorMessage = ""
+
   public existeUsuario: boolean
 
   public clicked = false
 
   public pesquisando = false
 
-  constructor(private fb: FormBuilder, private loginService: LoginService) {}
+  constructor(
+    private fb: FormBuilder,
+    private readonly loginUseCase: LoginUseCase,
+    private readonly route: Router
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       email: this.fb.control("", Validators.required),
-      senha: this.fb.control("", Validators.required),
+      password: this.fb.control("", Validators.required),
     })
-    this.loginService.buscaUsuario().subscribe(resp => {})
-    this.addClass()
   }
-
-  ngAfterViewInit() {}
 
   clickedToFalse() {
     this.clicked = false
   }
 
-  onSubmit() {}
+  onSubmit() {
+    const email = this.loginForm.get("email")?.value as string
+    const password = this.loginForm.get("password")?.value as string
 
-  addClass() {
-    document.querySelector("body").style.background = "#ffc107"
+    this.loginUseCase.execute({ email, password }).subscribe(
+      () => this.route.navigate(["/home"]),
+      ([error]: Failure[]) => {
+        this.errorMessage = error.message
+      }
+    )
   }
 }

@@ -5,7 +5,6 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap"
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome"
 import { FormsModule, ReactiveFormsModule } from "@angular/forms"
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http"
-import { LoginService } from "./presentation/pages/user/login/login.service"
 import { CadastroPetService } from "./presentation/pages/cadastro-pet/cadastro-pet.service"
 
 import { AppRoutingModule } from "./app-routing.module"
@@ -20,6 +19,9 @@ import { RegisterUserUseCase } from "./domain/use_cases/user/create_user/registe
 import { HttpErrorInterceptor } from "./infra/http/error_interceptor"
 import { UserRepositoryToken } from "./domain/repositories/user_repository"
 import { RemoteUserRepository } from "./infra/repositories/user_repository"
+import { StorageToken } from "./domain/providers/storage"
+import { NativeStorageProvider } from "./infra/providers/native_storage_provider"
+import { LoginUseCase } from "./domain/use_cases/user/login/login_use_case"
 
 @NgModule({
   declarations: [
@@ -48,9 +50,10 @@ import { RemoteUserRepository } from "./infra/repositories/user_repository"
       multi: true,
     },
     CadastroPetService,
-    LoginService,
     RegisterUserUseCase,
+    LoginUseCase,
     { provide: UserRepositoryToken, useClass: RemoteUserRepository },
+    { provide: StorageToken, useClass: NativeStorageProvider },
   ],
   bootstrap: [AppComponent],
 })
