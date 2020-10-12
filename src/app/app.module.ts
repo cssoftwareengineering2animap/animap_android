@@ -20,6 +20,9 @@ import { RegisterUserUseCase } from "./domain/use_cases/user/create_user/registe
 import { HttpErrorInterceptor } from "./infra/http/error_interceptor"
 import { UserRepositoryToken } from "./domain/repositories/user_repository"
 import { RemoteUserRepository } from "./infra/repositories/user_repository"
+import { StorageToken } from "./domain/providers/storage"
+import { NativeStorageProvider } from "./infra/providers/native_storage_provider"
+import { LoginUseCase } from "./domain/use_cases/user/login/login_use_case"
 
 @NgModule({
   declarations: [
@@ -50,7 +53,9 @@ import { RemoteUserRepository } from "./infra/repositories/user_repository"
     CadastroPetService,
     LoginService,
     RegisterUserUseCase,
+    LoginUseCase,
     { provide: UserRepositoryToken, useClass: RemoteUserRepository },
+    { provide: StorageToken, useClass: NativeStorageProvider },
   ],
   bootstrap: [AppComponent],
 })
