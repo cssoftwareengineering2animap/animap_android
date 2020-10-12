@@ -48,9 +48,7 @@ export class RegisterUserComponent implements OnInit {
     const password = this.registrationForm.get("password")?.value as string
 
     this.registerUserUseCase.execute({ name, email, password }).subscribe(
-      ({ data: user }) => {
-        this.route.navigate(["/cadastro-pet"])
-      },
+      () => this.route.navigate(["/cadastro-pet"]),
       ([error]: Failure[]) => {
         this.errorMessage = error.message
       }
