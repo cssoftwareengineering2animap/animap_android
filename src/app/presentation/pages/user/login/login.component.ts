@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core"
 import { FormGroup, FormBuilder, Validators } from "@angular/forms"
 import { Router } from "@angular/router"
+import _ from "lodash"
 import { Failure } from "../../../../core/types/failure"
 import { LoginUseCase } from "../../../../domain/use_cases/user/login/login_use_case"
 
@@ -31,10 +32,17 @@ export class LoginComponent implements OnInit {
       email: this.fb.control("", Validators.required),
       password: this.fb.control("", Validators.required),
     })
+    this.addOrangeBackground()
   }
 
   clickedToFalse() {
     this.clicked = false
+  }
+
+  addOrangeBackground() {
+    if (!_.isNil(document.querySelector("body"))) {
+      document.querySelector("body").style.background = "#ffc107"
+    }
   }
 
   onSubmit() {

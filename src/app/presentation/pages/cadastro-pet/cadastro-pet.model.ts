@@ -1,13 +1,9 @@
 export class CadastroPet {
   id: number
-
   nome: string
-
-  raca: string
-
+  raca?: string
   tipo: string
-
-  observacoes: string
+  observacoes?: string
 
   constructor(nome: string, tipo: string, raca?: string, observacoes?: string) {
     this.nome = nome
