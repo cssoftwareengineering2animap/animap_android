@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: "cadastro-anfitriao", component: CadastroAnfitriaoComponent },
   { path: "cadastro-pet", component: CadastroPetComponent },
   { path: "home", component: HomeComponent },
-  { path: "**", redirectTo: "/login" },
+  { path: "**", redirectTo: "/login" }
 ]
 
 @NgModule({

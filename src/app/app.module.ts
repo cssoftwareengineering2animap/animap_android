@@ -21,7 +21,9 @@ import { UserRepositoryToken } from "./domain/repositories/user_repository"
 import { RemoteUserRepository } from "./infra/repositories/user_repository"
 import { StorageToken } from "./domain/providers/storage"
 import { NativeStorageProvider } from "./infra/providers/native_storage_provider"
-import { LoginUseCase } from "./domain/use_cases/user/login/login_use_case"
+import { LoginUseCase } from "./domain/use_cases/user/login/login_use_case";
+import { HomeUsuarioComponent } from './presentation/pages/home/home-usuario/home-usuario.component';
+import { HomeAnfitriaoComponent } from './presentation/pages/home/home-anfitriao/home-anfitriao.component'
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { LoginUseCase } from "./domain/use_cases/user/login/login_use_case"
     CadastroAnfitriaoComponent,
     CadastroPetComponent,
     HomeComponent,
+    HomeUsuarioComponent,
+    HomeAnfitriaoComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,83 @@
+<div style="height: 100vh;" id="main">
+  <div class="head bg-warning text-white d-flex flex-column ">
+      <div class="px-3 py-2 d-flex justify-content-between">
+          <p class="lead my-auto">Home</p>
+          <button class="btn-toggle" (click)="toggle()">
+            <fa-icon [icon]="faBars"></fa-icon>
+          </button>
+      </div>
+      <div id="dropdown-div" *ngIf="dropdownToggle" >
+        <ul class="p-3 text-bold">
+          <li>Home</li>
+          <li class="my-2">Meus Pets</li>
+          <li>Passeios</li>
+        </ul>
+      </div>
+  </div>
+
+  <div class="text-warning my-2">
+    <p class="lead text-center display-4">Que tal...</p>
+    <p class="lead text-center">Um passeio para o seu pet!</p>
+  </div>
+
+  <div class="div-carousel">
+    <ngb-carousel *ngIf="images">
+      <ng-template ngbSlide>
+        <div class="picsum-img-wrapper">
+          <img [src]="images[0]" alt="Random first slide">
+        </div>
+        <div class="carousel-caption text-white">
+          <h3>Simples</h3>
+          <p>Encontre o anfitrião adequado para cuidar de seu pet com apenas alguns <i>clicks</i>.</p>
+        </div>
+      </ng-template>
+      <ng-template ngbSlide>
+        <div class="picsum-img-wrapper">
+          <img [src]="images[1]" alt="Random second slide">
+        </div>
+        <div class="carousel-caption">
+          <h3>Confiável</h3>
+          <p>Anfitriões registrados têm seus antecedentes verificados.</p>
+        </div>
+      </ng-template>
+      <ng-template ngbSlide>
+        <div class="picsum-img-wrapper">
+          <img [src]="images[2]"  alt="Random third slide">
+        </div>
+        <div class="carousel-caption">
+          <h3>Diversidade</h3>
+          <p>Para cães e gatos.</p>
+        </div>
+      </ng-template>
+    </ngb-carousel>
+  </div>
+
+  <div class="agendar mt-4">
+    <div class="botao d-flex justify-content-center">
+      <button class="btn btn-warning text-light font-weight-bold"
+          id="btnCadastrar">Agendar</button>
+  </div>
+  </div>
+
+  <div id="como-funciona" class="text-warning p-3">
+      <h4>Como funciona?</h4>
+      <div class="container rounded text-secondary p-3">
+        <div class="row">
+          <div class="col-4">
+            <img id="check-img" [src]="assetsUrl+'check.png'">
+          </div>
+          <div class="col-8 m-0 d-flex flex-column justify-content-center">
+            <p>Nós encontraremos o <b>Anfitrião</b> perfeito!</p>
+          </div>
+        </div>
+        <div class="row text-center p-2">
+          <p>Com base nos dados do seu cadastro, encontraremos o <b style="font-size: 1.2em;">melhor</b> para você!!</p>
+        </div>
+      </div>
+  </div>
+
+  <div class="mb-2" id="ad-1">
+    <img class="mx-auto d-block" [src]="assetsUrl+'ad.png'" style="width: 95%;">
+  </div>
+
+</div>
