@@ -1,5 +1,5 @@
 import { Inject, Injectable } from "@angular/core"
-import { map } from "rxjs/operators"
+import { flatMap } from "rxjs/operators"
 import { Storage, StorageToken } from "../../../providers/storage"
 import {
   UserRepository,
@@ -19,5 +19,5 @@ export class LoginUseCase {
   execute = (data: LoginDto) =>
     this.userRepository
       .login(data)
-      .pipe(map(({ data: token }) => this.storage.set("token", token)))
+      .pipe(flatMap(({ data: token }) => this.storage.set("token", token)))
 }

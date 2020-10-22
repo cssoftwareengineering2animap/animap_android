@@ -1,7 +1,5 @@
 import { Component, OnInit } from "@angular/core"
 import { FormGroup, FormBuilder, Validators } from "@angular/forms"
-import * as _ from 'lodash';
-
 
 @Component({
   selector: "app-cadastro-anfitriao",
@@ -11,11 +9,7 @@ import * as _ from 'lodash';
 export class CadastroAnfitriaoComponent implements OnInit {
   public cadastroForm: FormGroup
 
-  constructor(
-    private formBuilder: FormBuilder,
-
-    //private route: Router
-  ) {}
+  constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
     this.cadastroForm = this.formBuilder.group({
@@ -58,7 +52,7 @@ export class CadastroAnfitriaoComponent implements OnInit {
   }
 
   addClass() {
-    if(_.isNil(document.querySelector("body"))) {
+    if (document.querySelector("body")) {
       document.querySelector("body").style.background = "#ffc107"
     }
   }
