@@ -10,4 +10,18 @@ export class NativeStorageProvider implements Storage {
         typeof value === "string" ? value : JSON.stringify(value)
       )
     )
+
+  get = <T>(key: string) => {
+    const value = localStorage.getItem(key)
+    if (!value) {
+      return null
+    }
+
+    try {
+      const parsedValue = JSON.parse(value) as T
+      return Promise.resolve(parsedValue)
+    } catch (error) {
+      return Promise.resolve((value as unknown) as T)
+    }
+  }
 }
