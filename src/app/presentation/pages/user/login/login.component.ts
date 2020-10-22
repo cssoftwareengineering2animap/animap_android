@@ -1,7 +1,8 @@
-import { Component, OnInit } from "@angular/core"
+import { Component, Inject, OnInit } from "@angular/core"
 import { FormGroup, FormBuilder, Validators } from "@angular/forms"
 import { Router } from "@angular/router"
 import { Failure } from "../../../../core/types/failure"
+import { Storage, StorageToken } from "../../../../domain/providers/storage"
 import { LoginUseCase } from "../../../../domain/use_cases/user/login/login_use_case"
 
 @Component({
@@ -23,7 +24,9 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private readonly loginUseCase: LoginUseCase,
-    private readonly route: Router
+    private readonly route: Router,
+    @Inject(StorageToken)
+    private readonly storage: Storage
   ) {}
 
   ngOnInit(): void {
@@ -31,7 +34,14 @@ export class LoginComponent implements OnInit {
       email: this.fb.control("", Validators.required),
       password: this.fb.control("", Validators.required),
     })
+
     this.addOrangeBackground()
+
+    this.storage.get<string>("token").then(token => {
+      if (token) {
+        this.route.navigate(["/home"])
+      }
+    })
   }
 
   clickedToFalse() {
