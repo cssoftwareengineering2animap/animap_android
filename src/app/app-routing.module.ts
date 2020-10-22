@@ -6,14 +6,24 @@ import { CadastroAnfitriaoComponent } from "./presentation/pages/cadastro-anfitr
 import { LoginComponent } from "./presentation/pages/user/login/login.component"
 import { CadastroPetComponent } from "./presentation/pages/cadastro-pet/cadastro-pet.component"
 import { RegisterUserComponent } from "./presentation/pages/user/register/register.component"
+import { RequestForgotPasswordComponent } from "./presentation/pages/user/forgot-password/request-forgot-password/request-forgot-password.component"
+import { ResetPasswordComponent } from "./presentation/pages/user/forgot-password/reset-password/reset-password.component"
 
 const routes: Routes = [
+  {
+    path: "request-forgot-password",
+    component: RequestForgotPasswordComponent,
+  },
+  {
+    path: "reset-password",
+    component: ResetPasswordComponent,
+  },
   { path: "login", component: LoginComponent },
   { path: "cadastro", component: RegisterUserComponent },
   { path: "cadastro-anfitriao", component: CadastroAnfitriaoComponent },
   { path: "cadastro-pet", component: CadastroPetComponent },
   { path: "home", component: HomeComponent },
-  { path: "**", redirectTo: "/login" }
+  { path: "**", redirectTo: "/login" },
 ]
 
 @NgModule({

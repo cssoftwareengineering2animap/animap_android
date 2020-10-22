@@ -1,15 +1,16 @@
 import { Component, OnInit } from "@angular/core"
 import { FormGroup, FormBuilder, Validators } from "@angular/forms"
 import { Router } from "@angular/router"
-import { Failure } from "../../../../core/types/failure"
-import { LoginUseCase } from "../../../../domain/use_cases/user/login/login_use_case"
+
+import { Failure } from "../../../../../core/types/failure"
+import { RequestForgotPasswordUseCase } from "../../../../../domain/use_cases/user/forgot_password/request_forgot_pasword/request_forgot_pasword_use_case"
 
 @Component({
-  selector: "app-login",
-  templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.scss"],
+  selector: "app-request-forgot-password",
+  templateUrl: "./request-forgot-password.component.html",
+  styleUrls: ["./request-forgot-password.component.scss"],
 })
-export class LoginComponent implements OnInit {
+export class RequestForgotPasswordComponent implements OnInit {
   loginForm: FormGroup
 
   errorMessage = ""
@@ -22,14 +23,13 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private readonly loginUseCase: LoginUseCase,
+    private readonly requestForgotPasswordUseCase: RequestForgotPasswordUseCase,
     private readonly route: Router
   ) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       email: this.fb.control("", Validators.required),
-      password: this.fb.control("", Validators.required),
     })
     this.addOrangeBackground()
   }
@@ -45,11 +45,10 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    const email = this.loginForm.get("email")?.value as string
-    const password = this.loginForm.get("password")?.value as string
+    const email = this.loginForm.get("email")?.value
 
-    this.loginUseCase.execute({ email, password }).subscribe(
-      () => this.route.navigate(["/home"]),
+    this.requestForgotPasswordUseCase.execute(email).subscribe(
+      () => this.route.navigate(["/reset-password"], { state: { email } }),
       ([error]: Failure[]) => {
         this.errorMessage = error.message
       }

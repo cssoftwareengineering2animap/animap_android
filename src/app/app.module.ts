@@ -21,9 +21,13 @@ import { UserRepositoryToken } from "./domain/repositories/user_repository"
 import { RemoteUserRepository } from "./infra/repositories/user_repository"
 import { StorageToken } from "./domain/providers/storage"
 import { NativeStorageProvider } from "./infra/providers/native_storage_provider"
-import { LoginUseCase } from "./domain/use_cases/user/login/login_use_case";
-import { HomeUsuarioComponent } from './presentation/pages/home/home-usuario/home-usuario.component';
-import { HomeAnfitriaoComponent } from './presentation/pages/home/home-anfitriao/home-anfitriao.component'
+import { LoginUseCase } from "./domain/use_cases/user/login/login_use_case"
+import { HomeUsuarioComponent } from "./presentation/pages/home/home-usuario/home-usuario.component"
+import { HomeAnfitriaoComponent } from "./presentation/pages/home/home-anfitriao/home-anfitriao.component"
+import { RequestForgotPasswordComponent } from "./presentation/pages/user/forgot-password/request-forgot-password/request-forgot-password.component"
+import { RequestForgotPasswordUseCase } from "./domain/use_cases/user/forgot_password/request_forgot_pasword/request_forgot_pasword_use_case"
+import { ResetPasswordComponent } from "./presentation/pages/user/forgot-password/reset-password/reset-password.component"
+import { ResetPasswordUseCase } from "./domain/use_cases/user/forgot_password/reset_password/reset_password_use_case"
 
 @NgModule({
   declarations: [
@@ -35,6 +39,8 @@ import { HomeAnfitriaoComponent } from './presentation/pages/home/home-anfitriao
     HomeComponent,
     HomeUsuarioComponent,
     HomeAnfitriaoComponent,
+    RequestForgotPasswordComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,6 +62,8 @@ import { HomeAnfitriaoComponent } from './presentation/pages/home/home-anfitriao
     CadastroPetService,
     RegisterUserUseCase,
     LoginUseCase,
+    RequestForgotPasswordUseCase,
+    ResetPasswordUseCase,
     { provide: UserRepositoryToken, useClass: RemoteUserRepository },
     { provide: StorageToken, useClass: NativeStorageProvider },
   ],
