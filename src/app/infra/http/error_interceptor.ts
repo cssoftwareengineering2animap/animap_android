@@ -5,6 +5,7 @@ import {
   HttpRequest,
   HttpErrorResponse,
 } from "@angular/common/http"
+import { Injectable } from "@angular/core"
 import { Router } from "@angular/router"
 import { StatusCodes } from "http-status-codes"
 
@@ -12,6 +13,7 @@ import { Observable, throwError } from "rxjs"
 
 import { retry, catchError } from "rxjs/operators"
 
+@Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
   constructor(private readonly route: Router) {}
 
