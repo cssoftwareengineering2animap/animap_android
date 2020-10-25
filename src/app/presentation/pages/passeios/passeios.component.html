@@ -1,0 +1,54 @@
+<div style="height: 100vh" id="main">
+  <div class="head bg-warning text-white d-flex flex-column">
+    <div class="px-3 py-2 d-flex justify-content-between">
+      <p class="lead my-auto">Passeios</p>
+      <button class="btn-toggle" (click)="toggle()">
+        <fa-icon [icon]="faBars"></fa-icon>
+      </button>
+    </div>
+    <div id="dropdown-div" *ngIf="dropdownToggle">
+      <ul class="p-3 text-bold">
+        <li [routerLink]="['/home']">Home</li>
+        <li [routerLink]="['/pets']">Meus Pets</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="passeios text-dark">
+    <div *ngFor="let passeio of passeios" class="card my-2 mx-auto">
+      <div class="card-header d-flex justify-content-between">
+        <span><span class="text-primary">{{passeio?.nmPet}}</span> - {{getHora(passeio?.dtPasseio)}}</span>
+        <span>{{getData(passeio?.dtPasseio)}}</span>
+      </div>
+      <div class="card-body d-flex flex-column justify-content-center">
+        <div class="align-self-end">
+          <fa-icon (click)="showDialog()" class="fa-comment text-secondary" [icon]="faComment"></fa-icon>
+          <fa-icon class="fa-ban text-danger ml-2" (click)="confirm(passeio?.nmAnfitriao)" [icon]="faBan"></fa-icon>
+        </div>
+        <span class="align-self-center">{{ passeio?.nmAnfitriao }}</span>
+        <div class="imagem d-flex flex-column justify-content-center my-2 mx-auto">
+          <span class="text-white">{{ passeio?.nmAnfitriao[0].toUpperCase()}}</span>
+        </div>
+        <span class="align-self-center mb-2 text-center">
+          {{passeio?.nmAnfitriao}} já realizou {{passeio?.qtdPasseios}} passeios.
+        </span>
+        <span class="card-text text-success align-self-center">R$
+          {{passeio?.vlPreco.toFixed(2).replace('.',',')}}</span>
+        <div *ngIf="passeio?.idStatus === 0" class="finalizado align-self-center text-white bg-success py-1 px-3 mt-2">
+          <span class="align-self-center text-white">Finalizado</span>
+        </div>
+
+        <div *ngIf="passeio?.idStatus === 1"
+          class="nao-finalizado align-self-center text-white bg-danger py-1 px-3 mt-2">
+          <span class="align-self-center text-white">Não Finalizado</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-confirmDialog header="Bloquear" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+<p-dialog header="Em Breve" [(visible)]="display">
+  A funcionalidade de "chat" está em fase de desenvolvimento.
+</p-dialog>

@@ -8,7 +8,6 @@
   font-size: 64px;
 }
 
-
 #main {
   font-family: Gotham;
   color: #7c25f8;
@@ -25,7 +24,8 @@ img {
   color: #fff;
 }
 
-ul, li {
+ul,
+li {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -43,7 +43,7 @@ ul, li {
 }
 
 .div-carousel {
-  border-top: 3px solid orange;
+  border-top: 4px solid orange;
 }
 
 .carousel-caption {
@@ -65,5 +65,3 @@ ul, li {
 #como-funciona > div {
   background-color: #e3e3e3 !important;
 }
-
-
