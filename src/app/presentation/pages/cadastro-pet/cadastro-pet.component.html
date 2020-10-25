@@ -1,66 +1,125 @@
-<div style="height: 100vh;" id="main">
-    <div class="head bg-warning text-white d-flex flex-column">
-        <div>
-            <fa-icon [icon]="faPaw"></fa-icon>
-            <h5 class="d-inline ml-3">Cadastre seu pet</h5>
-        </div>
+<div style="height: 100vh" id="main">
+  <div class="head bg-warning text-white d-flex flex-column">
+    <div>
+      <fa-icon [icon]="faPaw"></fa-icon>
+      <h5 class="d-inline ml-3">Cadastre seu pet</h5>
     </div>
-    <div class="container pb-3">
-        <div class="titulo mt-2">
-            <p>
-                <span class="lead font-weight-bold text-secondary">
-                    Dados do Animal
-                </span>
-            </p>
-        </div>
-        <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()">
-            <div class="row mt-1">
-                <div class="col-4">
-                    <div class="image border-warning d-flex flex-column justify-content-center align-items-center">
-                        <fa-icon class="text-secondary" [icon]="faImage"></fa-icon>
-                    </div>
-                </div>
-                <div class="col-8 d-flex flex-column justify-content-center">
-                    <div class="form-group">
-                        <label for="nomeAnimal"><b>Nome do Animal </b><span class="align-top text-warning">*</span></label>
-                        <input type="text" class="form-control" id="nomeAnimal" placeholder="Xuxu" formControlName="nome">
-                        <div *ngIf="cadastroForm.get('nome').invalid  && (cadastroForm.get('nome').dirty || cadastroForm.get('nome').touched)"
-                            class="alert alert-danger text-center">
-                            <div *ngIf="cadastroForm.get('nome').hasError('required')">
-                                O nome é obrigatório.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group mt-1">
-                <label for="tipoAnimal"><b>Tipo do Animal </b><span class="align-top text-warning">*</span></label>
-                <select class="form-control" id="tipoAnimal" formControlName="tipo">
-                    <option [ngValue]="null" hidden>Selecione...</option>
-                    <option *ngFor="let animal of animais" [ngValue]="animal">
-                     {{ animal }}
-                    </option>
-                </select>
-                <div *ngIf="cadastroForm.get('tipo').invalid  && (cadastroForm.get('tipo').dirty && cadastroForm.get('tipo').touched)"
-                    class="alert alert-danger text-center">
-                    <div *ngIf="cadastroForm.get('tipo').hasError('required')">
-                        Tipo Obrigatório
-                    </div>
-                </div>
-            </div>
-            <div class="form-group mt-1">
-                <label for="racaAnimal"><b>Raça do Animal</b></label>
-                <input type="text" class="form-control" id="racaAnimal" formControlName="raca" placeholder="ex: Beagle">
-            </div>
-            <div class="form-group">
-                <label for="observacoes"><b>Observações</b></label>
-                <textarea class="form-control" id="observacoes" rows="3" formControlName="observacoes"
-                    placeholder="Doenças, alergias, medos e etc..."></textarea>
-            </div>
-            <div class="botao d-flex justify-content-center">
-                <button [disabled]="cadastroForm.invalid" type="submit" class="btn btn-dark text-light font-weight-bold"
-                    id="btnCadastrar">Cadastrar</button>
-            </div>
-        </form>
+  </div>
+  <div class="container pb-3">
+    <div class="titulo mt-2">
+      <p>
+        <span class="lead font-weight-bold text-secondary">
+          Dados do Animal
+        </span>
+      </p>
     </div>
+    <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()">
+      <div class="row mt-1">
+        <div class="col-4">
+          <div
+            class="image border-warning d-flex flex-column justify-content-center align-items-center"
+          >
+            <fa-icon class="text-secondary" [icon]="faImage"></fa-icon>
+          </div>
+        </div>
+        <div class="col-8 d-flex flex-column justify-content-center">
+          <div class="form-group">
+            <label for="nomeAnimal"
+              ><b>Nome do Animal </b
+              ><span class="align-top text-warning">*</span></label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="nomeAnimal"
+              placeholder="Xuxu"
+              formControlName="nome"
+            />
+            <div
+              *ngIf="
+                cadastroForm.get('nome').invalid &&
+                (cadastroForm.get('nome').dirty ||
+                  cadastroForm.get('nome').touched)
+              "
+              class="alert alert-danger text-center"
+            >
+              <div *ngIf="cadastroForm.get('nome').hasError('required')">
+                O nome é obrigatório.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group mt-1">
+        <label for="tipoAnimal"
+          ><b>Tipo do Animal </b
+          ><span class="align-top text-warning">*</span></label
+        >
+        <select class="form-control" id="tipoAnimal" formControlName="tipo">
+          <option [ngValue]="null" hidden>Selecione...</option>
+          <option *ngFor="let animal of animais" [ngValue]="animal">
+            {{ animal }}
+          </option>
+        </select>
+        <div
+          *ngIf="
+            cadastroForm.get('tipo').invalid &&
+            cadastroForm.get('tipo').dirty &&
+            cadastroForm.get('tipo').touched
+          "
+          class="alert alert-danger text-center"
+        >
+          <div *ngIf="cadastroForm.get('tipo').hasError('required')">
+            Tipo Obrigatório
+          </div>
+        </div>
+      </div>
+      <div class="form-group mt-1">
+        <label for="racaAnimal"><b>Raça do Animal</b></label>
+        <input
+          type="text"
+          class="form-control"
+          id="racaAnimal"
+          formControlName="raca"
+          placeholder="ex: Beagle"
+        />
+      </div>
+      <div class="form-group mt-1">
+        <label for="animalAge"><b>Idade do Animal</b></label>
+        <input
+          type="number"
+          min="0"
+          max="100"
+          step="1"
+          class="form-control"
+          id="animalAge"
+          formControlName="age"
+          placeholder="3"
+        />
+      </div>
+      <div class="form-group">
+        <label for="observacoes"><b>Observações</b></label>
+        <textarea
+          class="form-control"
+          id="observacoes"
+          rows="3"
+          formControlName="observacoes"
+          placeholder="Doenças, alergias, medos e etc..."
+        ></textarea>
+      </div>
+      <div *ngIf="errorMessage" class="alert alert-danger text-center">
+        {{ errorMessage }}
+      </div>
+      <div class="botao d-flex justify-content-center">
+        <button
+          [disabled]="cadastroForm.invalid"
+          type="submit"
+          class="btn btn-dark text-light font-weight-bold"
+          id="btnCadastrar"
+        >
+          Cadastrar
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
