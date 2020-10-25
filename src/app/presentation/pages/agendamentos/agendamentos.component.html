@@ -17,21 +17,39 @@
 
   <div class="pets">
     <div id="list-example d-flex flex-column" class="list-group">
-      <a *ngFor="let pet of pets" class="list-group-item list-group-item-action align-self-center my-1 p-1" (click)="confirm(pet?.nmPet)">
+      <a
+        *ngFor="let pet of pets"
+        class="list-group-item list-group-item-action align-self-center my-1 p-1"
+        (click)="confirm(pet?.nmPet)"
+      >
         <div class="d-flex text-secondary">
-          <div class="col-3 imagem-animal d-flex justify-content-center m-0 p-0">
-            <div class="imagem d-flex flex-column justify-content-center align-self-center">
-              <span class="text-white">{{pet?.nmPet[0].toUpperCase()}}</span>
+          <div
+            class="col-3 imagem-animal d-flex justify-content-center m-0 p-0"
+          >
+            <div
+              class="imagem d-flex flex-column justify-content-center align-self-center"
+            >
+              <span class="text-white">{{ pet?.nmPet[0].toUpperCase() }}</span>
             </div>
           </div>
           <div class="d-flex flex-column">
-            <span><span class="text-primary">{{pet?.nmPet}}</span>, <span style="font-size: 14px;">{{getIdade(pet?.idadePet)}}</span></span>
-            <span class="text-secondary" style="font-size: 14px;">{{pet?.racaPet}}</span>
+            <span
+              ><span class="text-primary">{{ pet?.nmPet }}</span
+              >,
+              <span style="font-size: 14px">{{
+                getIdade(pet?.idadePet)
+              }}</span></span
+            >
+            <span class="text-secondary" style="font-size: 14px">{{
+              pet?.racaPet
+            }}</span>
           </div>
         </div>
       </a>
     </div>
   </div>
-
 </div>
-<p-confirmDialog header="Solicitar Passeio" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<p-confirmDialog
+  header="Solicitar Passeio"
+  icon="pi pi-exclamation-triangle"
+></p-confirmDialog>
