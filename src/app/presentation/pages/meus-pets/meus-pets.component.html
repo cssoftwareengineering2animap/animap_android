@@ -1,0 +1,41 @@
+<div style="height: 100vh" id="main">
+  <div class="head bg-warning text-white d-flex flex-column">
+    <div class="px-3 py-2 d-flex justify-content-between">
+      <p class="lead my-auto">Meus Pets</p>
+      <button class="btn-toggle" (click)="toggle()">
+        <fa-icon [icon]="faBars"></fa-icon>
+      </button>
+    </div>
+    <div id="dropdown-div" *ngIf="dropdownToggle">
+      <ul class="p-3 text-bold">
+        <li [routerLink]="['/home']">Home</li>
+        <li [routerLink]="['/passeios']">Passeios</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="cadastrar d-flex justify-content-center mt-2">
+    <button class="btn-dark text-warning d-flex justify-content-between bg-dark" [routerLink]="['/cadastro-pet']">
+      <span><fa-icon [icon]="faPlusCircle"></fa-icon></span>
+      <span>Cadastrar Novo Pet</span>
+    </button>
+  </div>
+
+  <div class="meus-pets">
+    <div *ngFor="let pet of pets">
+      <div class="card my-2 mx-auto text-secondary" style="width: 18rem;">
+        <div class="imagem d-flex flex-column justify-content-center my-2 mx-auto">
+          <span class="text-white">{{pet?.nmPet[0].toUpperCase()}}</span>
+        </div>
+        <div class="card-body d-flex flex-column align-items-center">
+          <h5 class="card-title text-dark">{{pet?.nmPet}}</h5>
+          <span>{{pet?.racaPet}}</span>
+          <span>{{getIdade(pet?.idadePet)}}</span>
+          <a href="#" class="btn btn-primary text-white mt-2">Editar Dados</a>
+        </div>
+      </div>
+    </div>
+    </div>
+</div>
+
+

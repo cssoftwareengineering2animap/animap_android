@@ -6,7 +6,8 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome"
 import { FormsModule, ReactiveFormsModule } from "@angular/forms"
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http"
 import { CadastroPetService } from "./presentation/pages/cadastro-pet/cadastro-pet.service"
-
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
 import { AppRoutingModule } from "./app-routing.module"
 import { AppComponent } from "./app.component"
 import { LoginComponent } from "./presentation/pages/user/login/login.component"
@@ -27,7 +28,12 @@ import { HomeAnfitriaoComponent } from "./presentation/pages/home/home-anfitriao
 import { RequestForgotPasswordComponent } from "./presentation/pages/user/forgot-password/request-forgot-password/request-forgot-password.component"
 import { RequestForgotPasswordUseCase } from "./domain/use_cases/user/forgot_password/request_forgot_pasword/request_forgot_pasword_use_case"
 import { ResetPasswordComponent } from "./presentation/pages/user/forgot-password/reset-password/reset-password.component"
-import { ResetPasswordUseCase } from "./domain/use_cases/user/forgot_password/reset_password/reset_password_use_case"
+import { ResetPasswordUseCase } from "./domain/use_cases/user/forgot_password/reset_password/reset_password_use_case";
+import { MeusPetsComponent } from './presentation/pages/meus-pets/meus-pets.component'
+import { PasseiosComponent } from "./presentation/pages/passeios/passeios.component"
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {DialogModule} from 'primeng/dialog';
+
 
 @NgModule({
   declarations: [
@@ -41,9 +47,12 @@ import { ResetPasswordUseCase } from "./domain/use_cases/user/forgot_password/re
     HomeAnfitriaoComponent,
     RequestForgotPasswordComponent,
     ResetPasswordComponent,
+    PasseiosComponent,
+    MeusPetsComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     NgbModule,
     FontAwesomeModule,
@@ -52,6 +61,8 @@ import { ResetPasswordUseCase } from "./domain/use_cases/user/forgot_password/re
     FormsModule,
     AppRoutingModule,
     RouterModule,
+    ConfirmDialogModule,
+    DialogModule
   ],
   providers: [
     {
@@ -64,6 +75,7 @@ import { ResetPasswordUseCase } from "./domain/use_cases/user/forgot_password/re
     LoginUseCase,
     RequestForgotPasswordUseCase,
     ResetPasswordUseCase,
+    ConfirmationService,
     { provide: UserRepositoryToken, useClass: RemoteUserRepository },
     { provide: StorageToken, useClass: NativeStorageProvider },
   ],

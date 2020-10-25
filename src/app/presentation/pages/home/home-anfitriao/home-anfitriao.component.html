@@ -1,0 +1,47 @@
+<div style="height: 100vh" id="main">
+  <div class="head bg-warning text-white d-flex flex-column">
+    <div class="px-3 py-2 d-flex justify-content-between">
+      <p class="lead my-auto">Home</p>
+      <button class="btn-toggle" (click)="toggle()">
+        <fa-icon [icon]="faBars"></fa-icon>
+      </button>
+    </div>
+    <div id="dropdown-div" *ngIf="dropdownToggle">
+      <ul class="p-3 text-bold">
+        <li>Home</li>
+        <li class="my-2">Gerenciar Dados</li>
+        <li>Passeios Realizados</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="minha-agenda d-flex flex-column">
+    <h3 class="text-warning my-3 align-self-center">Minha Agenda</h3>
+    <div class="align-self-center w-100 agenda py-2">
+      <ul>
+        <li *ngFor="let passeio of passeios">
+          <div class="row d-flex p-1">
+            <div class="col-3 imagem-animal d-flex justify-content-center">
+              <div class="imagem d-flex flex-column justify-content-center">
+                <span class="text-white">{{passeio?.nmPet[0].toUpperCase()}}</span>
+              </div>
+            </div>
+            <div class="col-6 info-animal">
+              <div class="nome-animal">
+                <span class="text-dark">{{passeio?.nmPet}}</span>
+              </div>
+              <div class="descricao-animal">
+                <div class="text-muted">{{passeio?.dsRaca}}</div>
+                <div class="text-muted">{{getIdade(passeio?.nrIdade)}}</div>
+              </div>
+            </div>
+            <div class="col-3 horario d-flex flex-column justify-content-center">
+              <div class="hora text-muted">{{dataToHora(passeio?.dtPasseio)}}</div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div>

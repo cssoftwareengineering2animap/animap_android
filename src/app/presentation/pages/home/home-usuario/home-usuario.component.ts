@@ -16,7 +16,7 @@ export class HomeUsuarioComponent implements OnInit {
   }
 
 
-  images = [this.assetsUrl+'passeio.jpg', this.assetsUrl+'doggg.png', this.assetsUrl+'gato.jpeg'];
+  images = [this.assetsUrl+'passeio.jpg', this.assetsUrl+'doggg.png', this.assetsUrl+'gato.jpg'];
 
   constructor(config: NgbCarouselConfig) {
     // customize default values of carousels used by this component tree
