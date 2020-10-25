@@ -1,13 +1,13 @@
 import { Inject, Injectable } from "@angular/core"
-import { flatMap, tap } from "rxjs/operators"
+import { flatMap, map, tap } from "rxjs/operators"
 import { Storage, StorageToken } from "../../../providers/storage"
 import {
   HostRepository,
   HostRepositoryToken,
 } from "../../../repositories/host_repository"
 
-import { CreateUserDto } from "../../user/create_user/create_user_dto"
 import { LoginUseCase } from "../../user/login/login_use_case"
+import { CreateHostDto, RegisterBankAccountDto } from "./create_host_dto"
 
 @Injectable()
 export class CreateHostUseCase {
@@ -20,9 +20,20 @@ export class CreateHostUseCase {
     private readonly loginUseCase: LoginUseCase
   ) {}
 
-  execute = (data: CreateUserDto) =>
-    this.hostRepository.create(data).pipe(
-      tap(({ data: user }) => this.storage.set("host", user)),
-      flatMap(() => this.loginUseCase.execute(data))
+  execute = ({
+    payment,
+    ...hostData
+  }: CreateHostDto & { payment: RegisterBankAccountDto }) =>
+    this.hostRepository.create(hostData).pipe(
+      tap(({ data: host }) => this.storage.set("host", host)),
+      flatMap(({ data: host }) =>
+        this.loginUseCase
+          .execute({
+            email: hostData.email,
+            password: hostData.password,
+          })
+          .pipe(flatMap(() => this.hostRepository.registerBankAccount(payment)))
+          .pipe(map(() => host))
+      )
     )
 }

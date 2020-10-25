@@ -1,5 +1,11 @@
-import { Host } from "@angular/core"
+import { Host } from "../../../entities/host_entity"
+
+export type RegisterBankAccountDto = {
+  bank: string
+  agency: string
+  account: string
+}
 
 export type CreateHostDto = {
   password: string
-} & Host
+} & Omit<Host, "id" | "createdAt" | "updatedAt">

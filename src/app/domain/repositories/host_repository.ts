@@ -1,18 +1,19 @@
 import { Observable } from "rxjs"
 import { Envelope } from "../../core/types/envelope"
-import { User } from "../entities/user_entity"
-import { CreateUserDto } from "../use_cases/user/create_user/create_user_dto"
-
-import { ResetPasswordDto } from "../use_cases/user/forgot_password/reset_password/reset_password_dto"
-import { LoginDto } from "../use_cases/user/login/login.dto"
+import { BankAccount } from "../entities/bank_account_entity"
+import { Host } from "../entities/host_entity"
+import {
+  CreateHostDto,
+  RegisterBankAccountDto,
+} from "../use_cases/host/create_host/create_host_dto"
 
 export type Token = "string"
 
 export interface HostRepository {
-  create: (data: CreateUserDto) => Observable<Envelope<User>>
-  login: (data: LoginDto) => Observable<Envelope<Token>>
-  requestForgotPassword: (email: string) => Observable<void>
-  resetPassword: (data: ResetPasswordDto) => Observable<void>
+  create: (data: CreateHostDto) => Observable<Envelope<Host>>
+  registerBankAccount: (
+    data: RegisterBankAccountDto
+  ) => Observable<Envelope<BankAccount>>
 }
 
 export const HostRepositoryToken = "HostRepository"

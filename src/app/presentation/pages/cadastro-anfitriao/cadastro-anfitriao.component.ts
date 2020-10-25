@@ -1,5 +1,8 @@
 import { Component, OnInit } from "@angular/core"
 import { FormGroup, FormBuilder, Validators } from "@angular/forms"
+import { Router } from "@angular/router"
+import { Failure } from "../../../core/types/failure"
+import { CreateHostUseCase } from "../../../domain/use_cases/host/create_host/create_host_use_case"
 
 @Component({
   selector: "app-cadastro-anfitriao",
@@ -9,7 +12,13 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms"
 export class CadastroAnfitriaoComponent implements OnInit {
   public cadastroForm: FormGroup
 
-  constructor(private formBuilder: FormBuilder) {}
+  errorMessage = ""
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private route: Router,
+    private readonly createHostUseCase: CreateHostUseCase
+  ) {}
 
   ngOnInit(): void {
     this.cadastroForm = this.formBuilder.group({
@@ -40,17 +49,32 @@ export class CadastroAnfitriaoComponent implements OnInit {
   }
 
   onSubmit() {
-    /*
-    const nome = this.cadastroForm.get("nome").value
+    const name = this.cadastroForm.get("name").value
     const email = this.cadastroForm.get("email").value
-    const senha = this.cadastroForm.get("senha").value
+    const password = this.cadastroForm.get("password").value
     const cpf = this.cadastroForm.get("cpf").value
-    const dadosBancarios = this.cadastroForm.get("dadosBancarios").value
+    const bank = this.cadastroForm.get("bank").value
+    const agency = this.cadastroForm.get("agency").value
+    const account = this.cadastroForm.get("account").value
 
-    const cadastro = new Cadastro(nome, email, senha, 2, cpf, dadosBancarios)
-    this.cadastroService.cadastraUsuario(cadastro).subscribe()
-
-    this.route.navigate(["/home"]) */
+    this.createHostUseCase
+      .execute({
+        name,
+        email,
+        password,
+        cpf,
+        payment: {
+          bank,
+          agency,
+          account,
+        },
+      })
+      .subscribe(
+        () => this.route.navigate(["/home"]),
+        ([error]: Failure[]) => {
+          this.errorMessage = error.message
+        }
+      )
   }
 
   addClass() {

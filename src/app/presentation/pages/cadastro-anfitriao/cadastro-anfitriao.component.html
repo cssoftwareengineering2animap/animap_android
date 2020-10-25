@@ -21,7 +21,7 @@
               class="form-control w-75 mx-auto text-center"
               formControlName="name"
               type="text"
-              placeholder="Nome de usuário"
+              placeholder="Nome"
               style="margin-bottom: -10px"
             />
             <div
@@ -233,6 +233,9 @@
           <p class="text-center text-primary text-underline m-0 mt-1">
             <u>Termos de Uso</u>
           </p>
+        </div>
+        <div *ngIf="errorMessage" class="alert alert-danger text-center">
+          {{ errorMessage }}
         </div>
         <button
           [disabled]="cadastroForm.invalid"
