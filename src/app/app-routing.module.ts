@@ -10,6 +10,7 @@ import { RegisterUserComponent } from "./presentation/pages/user/register/regist
 import { RequestForgotPasswordComponent } from "./presentation/pages/user/forgot-password/request-forgot-password/request-forgot-password.component"
 import { ResetPasswordComponent } from "./presentation/pages/user/forgot-password/reset-password/reset-password.component"
 import { PasseiosComponent } from "./presentation/pages/passeios/passeios.component"
+import { AgendamentosComponent } from "./presentation/pages/agendamentos/agendamentos.component"
 
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: "home", component: HomeComponent },
   { path: "pets", component: MeusPetsComponent },
   { path: "passeios", component: PasseiosComponent },
+  { path: "agendamentos", component: AgendamentosComponent },
   { path: "**", redirectTo: "/login" },
 ]
 

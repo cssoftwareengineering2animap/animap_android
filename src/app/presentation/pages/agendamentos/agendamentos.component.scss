@@ -80,3 +80,11 @@ ul, li {
 .list-group-item-action {
   width: 90%;
 }
+
+p-confirmDialog {
+  ::ng-deep {
+    .p-dialog {
+      width: 90%;
+    }
+  }
+}

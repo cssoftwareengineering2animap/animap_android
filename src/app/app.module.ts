@@ -1,3 +1,4 @@
+import { AgendamentosComponent } from './presentation/pages/agendamentos/agendamentos.component';
 import { RouterModule } from "@angular/router"
 import { BrowserModule } from "@angular/platform-browser"
 import { NgModule } from "@angular/core"
@@ -53,6 +54,7 @@ import { RemoteHostRepository } from "./infra/repositories/host_repository"
     ResetPasswordComponent,
     PasseiosComponent,
     MeusPetsComponent,
+    AgendamentosComponent
   ],
   imports: [
     BrowserModule,
