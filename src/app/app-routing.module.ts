@@ -1,3 +1,4 @@
+import { SolicitacoesComponent } from './presentation/pages/solicitacoes/solicitacoes.component';
 import { NgModule } from "@angular/core"
 import { Routes, RouterModule } from "@angular/router"
 import { MeusPetsComponent } from "./presentation/pages/meus-pets/meus-pets.component"
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: "pets", component: MeusPetsComponent },
   { path: "passeios", component: PasseiosComponent },
   { path: "agendamentos", component: AgendamentosComponent },
+  { path: "solicitacoes", component: SolicitacoesComponent },
   { path: "**", redirectTo: "/login" },
 ]
 
