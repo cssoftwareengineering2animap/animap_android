@@ -5,17 +5,22 @@ import {
   HttpRequest,
   HttpErrorResponse,
 } from "@angular/common/http"
-import { Injectable } from "@angular/core"
+import { Inject, Injectable } from "@angular/core"
 import { Router } from "@angular/router"
 import { StatusCodes } from "http-status-codes"
 
 import { Observable, throwError } from "rxjs"
 
 import { retry, catchError } from "rxjs/operators"
+import { StorageToken, Storage } from "../../domain/providers/storage"
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
-  constructor(private readonly route: Router) {}
+  constructor(
+    private readonly route: Router,
+    @Inject(StorageToken)
+    private readonly storage: Storage
+  ) {}
 
   intercept(
     request: HttpRequest<unknown>,
@@ -25,6 +30,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       retry(1),
       catchError((error: HttpErrorResponse) => {
         if (error.status === StatusCodes.UNAUTHORIZED) {
+          this.storage.clear()
           this.route.navigate(["/login"])
         }
 

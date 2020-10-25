@@ -24,4 +24,6 @@ export class NativeStorageProvider implements Storage {
       return Promise.resolve((value as unknown) as T)
     }
   }
+
+  clear = async () => localStorage.clear()
 }
