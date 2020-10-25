@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Gotham";
-  src: url("../../../../../assets/fonts/Gotham-Medium.woff");
+  src: url("../../../../assets/fonts/Gotham-Medium.woff");
 }
 
 .titulo {
@@ -68,8 +68,8 @@ ul, li {
 
 .imagem {
   background-image: linear-gradient(45deg, rgb(236, 163, 25), rgb(250, 92, 0));
-  height: 60px !important;
-  width: 60px !important;
+  height: 40px !important;
+  width: 40px !important;
   border-radius: 200px;
 }
 
@@ -77,17 +77,6 @@ ul, li {
   text-align: center;
 }
 
-.descricao-animal {
-  font-size: 14px;
-  font-weight: lighter;
-}
-
-.agenda {
-  border-top: 2px solid  rgb(236, 163, 25);
-}
-
-.lista-passeios {
-  background: #f7f7f7;
-  border-radius: 5px;
-  margin: 0 5px;
+.list-group-item-action {
+  width: 90%;
 }

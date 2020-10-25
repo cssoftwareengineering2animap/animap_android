@@ -8,9 +8,9 @@
     </div>
     <div id="dropdown-div" *ngIf="dropdownToggle">
       <ul class="p-3 text-bold">
-        <li>Home</li>
-        <li class="my-2">Gerenciar Dados</li>
-        <li>Passeios Realizados</li>
+        <li>Gerenciar Dados</li>
+        <li class="my-2">Passeios Realizados</li>
+        <li [routerLink]="['/agendamentos']">Agendamentos</li>
       </ul>
     </div>
   </div>
@@ -19,7 +19,7 @@
     <h3 class="text-warning my-3 align-self-center">Minha Agenda</h3>
     <div class="align-self-center w-100 agenda py-2">
       <ul>
-        <li *ngFor="let passeio of passeios">
+        <li class="lista-passeios mb-1" *ngFor="let passeio of passeios">
           <div class="row d-flex p-1">
             <div class="col-3 imagem-animal d-flex justify-content-center">
               <div class="imagem d-flex flex-column justify-content-center">
