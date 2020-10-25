@@ -1,3 +1,4 @@
+import { AgendamentosComponent } from './presentation/pages/agendamentos/agendamentos.component';
 import { RouterModule } from "@angular/router"
 import { BrowserModule } from "@angular/platform-browser"
 import { NgModule } from "@angular/core"
@@ -37,7 +38,8 @@ import { PetRepositoryToken } from "./domain/repositories/pet_repository"
 import { RemotePetRepository } from "./infra/repositories/pet_repository"
 import { CreateHostUseCase } from "./domain/use_cases/host/create_host/create_host_use_case"
 import { HostRepositoryToken } from "./domain/repositories/host_repository"
-import { RemoteHostRepository } from "./infra/repositories/host_repository"
+import { RemoteHostRepository } from "./infra/repositories/host_repository";
+import { SolicitacoesComponent } from './presentation/pages/solicitacoes/solicitacoes.component'
 
 @NgModule({
   declarations: [
@@ -53,6 +55,8 @@ import { RemoteHostRepository } from "./infra/repositories/host_repository"
     ResetPasswordComponent,
     PasseiosComponent,
     MeusPetsComponent,
+    AgendamentosComponent,
+    SolicitacoesComponent
   ],
   imports: [
     BrowserModule,
