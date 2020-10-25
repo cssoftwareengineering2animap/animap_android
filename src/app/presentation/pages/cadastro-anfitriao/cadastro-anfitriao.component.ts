@@ -1,5 +1,8 @@
 import { Component, OnInit } from "@angular/core"
 import { FormGroup, FormBuilder, Validators } from "@angular/forms"
+import { Router } from "@angular/router"
+import { Failure } from "../../../core/types/failure"
+import { CreateHostUseCase } from "../../../domain/use_cases/host/create_host/create_host_use_case"
 
 @Component({
   selector: "app-cadastro-anfitriao",
@@ -9,11 +12,17 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms"
 export class CadastroAnfitriaoComponent implements OnInit {
   public cadastroForm: FormGroup
 
-  constructor(private formBuilder: FormBuilder) {}
+  errorMessage = ""
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private route: Router,
+    private readonly createHostUseCase: CreateHostUseCase
+  ) {}
 
   ngOnInit(): void {
     this.cadastroForm = this.formBuilder.group({
-      nome: this.formBuilder.control("", [
+      name: this.formBuilder.control("", [
         Validators.required,
         Validators.minLength(6),
       ]),
@@ -21,7 +30,7 @@ export class CadastroAnfitriaoComponent implements OnInit {
         Validators.required,
         Validators.email,
       ]),
-      senha: this.formBuilder.control("", [
+      password: this.formBuilder.control("", [
         Validators.required,
         Validators.minLength(6),
       ]),
@@ -30,25 +39,42 @@ export class CadastroAnfitriaoComponent implements OnInit {
         Validators.minLength(6),
       ]),
       cpf: this.formBuilder.control("", [Validators.required]),
-      dadosBancarios: this.formBuilder.control("", [Validators.required]),
-      termos: this.formBuilder.control("", [Validators.requiredTrue]),
+      bank: this.formBuilder.control("", [Validators.required]),
+      agency: this.formBuilder.control("", [Validators.required]),
+      account: this.formBuilder.control("", [Validators.required]),
+      terms: this.formBuilder.control("", [Validators.requiredTrue]),
     })
 
     this.addClass()
   }
 
   onSubmit() {
-    /*
-    const nome = this.cadastroForm.get("nome").value
+    const name = this.cadastroForm.get("name").value
     const email = this.cadastroForm.get("email").value
-    const senha = this.cadastroForm.get("senha").value
+    const password = this.cadastroForm.get("password").value
     const cpf = this.cadastroForm.get("cpf").value
-    const dadosBancarios = this.cadastroForm.get("dadosBancarios").value
+    const bank = this.cadastroForm.get("bank").value
+    const agency = this.cadastroForm.get("agency").value
+    const account = this.cadastroForm.get("account").value
 
-    const cadastro = new Cadastro(nome, email, senha, 2, cpf, dadosBancarios)
-    this.cadastroService.cadastraUsuario(cadastro).subscribe()
-
-    this.route.navigate(["/home"]) */
+    this.createHostUseCase
+      .execute({
+        name,
+        email,
+        password,
+        cpf,
+        payment: {
+          bank,
+          agency,
+          account,
+        },
+      })
+      .subscribe(
+        () => this.route.navigate(["/home"]),
+        ([error]: Failure[]) => {
+          this.errorMessage = error.message
+        }
+      )
   }
 
   addClass() {
@@ -57,10 +83,7 @@ export class CadastroAnfitriaoComponent implements OnInit {
     }
   }
 
-  senhasMatch() {
-    return (
-      this.cadastroForm.get("senha").value ===
-      this.cadastroForm.get("passwordConfirmation").value
-    )
-  }
+  passwordsMatch = () =>
+    this.cadastroForm.get("password").value ===
+    this.cadastroForm.get("passwordConfirmation").value
 }

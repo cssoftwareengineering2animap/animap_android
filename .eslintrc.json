@@ -25,7 +25,8 @@
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/unbound-method": "off",
     "class-methods-use-this": "off",
-    "@typescript-eslint/no-unsafe-assignment": "off"
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/no-unsafe-call": "off"
   },
   "settings": {
     "import/resolver": {

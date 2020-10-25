@@ -1,7 +1,6 @@
-import { ID } from "../../core/types/id"
+import { Entity } from "./entity"
 
-export interface User {
-  id: ID
+export interface User extends Entity {
   name: string
   email: string
   phone: string
@@ -11,6 +10,4 @@ export interface User {
   gradings: string
   blockedUsers: string
   blockedByUsers: string
-  createdAt: Date
-  updatedAt: Date
 }

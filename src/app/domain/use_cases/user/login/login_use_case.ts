@@ -19,5 +19,5 @@ export class LoginUseCase {
   execute = (data: LoginDto) =>
     this.userRepository
       .login(data)
-      .pipe(flatMap(({ data: token }) => this.storage.set("token", token)))
+      .pipe(flatMap(({ data: { token } }) => this.storage.set("token", token)))
 }
