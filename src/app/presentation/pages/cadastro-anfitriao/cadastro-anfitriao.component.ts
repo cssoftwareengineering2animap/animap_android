@@ -13,7 +13,7 @@ export class CadastroAnfitriaoComponent implements OnInit {
 
   ngOnInit(): void {
     this.cadastroForm = this.formBuilder.group({
-      nome: this.formBuilder.control("", [
+      name: this.formBuilder.control("", [
         Validators.required,
         Validators.minLength(6),
       ]),
@@ -21,7 +21,7 @@ export class CadastroAnfitriaoComponent implements OnInit {
         Validators.required,
         Validators.email,
       ]),
-      senha: this.formBuilder.control("", [
+      password: this.formBuilder.control("", [
         Validators.required,
         Validators.minLength(6),
       ]),
@@ -30,8 +30,10 @@ export class CadastroAnfitriaoComponent implements OnInit {
         Validators.minLength(6),
       ]),
       cpf: this.formBuilder.control("", [Validators.required]),
-      dadosBancarios: this.formBuilder.control("", [Validators.required]),
-      termos: this.formBuilder.control("", [Validators.requiredTrue]),
+      bank: this.formBuilder.control("", [Validators.required]),
+      agency: this.formBuilder.control("", [Validators.required]),
+      account: this.formBuilder.control("", [Validators.required]),
+      terms: this.formBuilder.control("", [Validators.requiredTrue]),
     })
 
     this.addClass()
@@ -57,10 +59,7 @@ export class CadastroAnfitriaoComponent implements OnInit {
     }
   }
 
-  senhasMatch() {
-    return (
-      this.cadastroForm.get("senha").value ===
-      this.cadastroForm.get("passwordConfirmation").value
-    )
-  }
+  passwordsMatch = () =>
+    this.cadastroForm.get("password").value ===
+    this.cadastroForm.get("passwordConfirmation").value
 }

@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http"
 import { Injectable } from "@angular/core"
 import { User } from "../../domain/entities/user_entity"
-import { RegisterUserDto } from "../../domain/use_cases/user/create_user/register_user_dto"
+import { RegisterUserDto } from "../../domain/use_cases/user/create_user/create_user_dto"
 import { Envelope } from "../../core/types/envelope"
 import { environment } from "../../../environments/environment"
 import {

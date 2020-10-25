@@ -8,11 +8,11 @@ import { LoginDto } from "../use_cases/user/login/login.dto"
 
 export type Token = "string"
 
-export interface UserRepository {
+export interface HostRepository {
   create: (data: CreateUserDto) => Observable<Envelope<User>>
   login: (data: LoginDto) => Observable<Envelope<Token>>
   requestForgotPassword: (email: string) => Observable<void>
   resetPassword: (data: ResetPasswordDto) => Observable<void>
 }
 
-export const UserRepositoryToken = "UserRepository"
+export const HostRepositoryToken = "HostRepository"

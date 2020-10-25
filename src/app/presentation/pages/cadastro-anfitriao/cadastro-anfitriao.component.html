@@ -19,23 +19,23 @@
             <input
               #nome
               class="form-control w-75 mx-auto text-center"
-              formControlName="nome"
+              formControlName="name"
               type="text"
               placeholder="Nome de usuário"
               style="margin-bottom: -10px"
             />
             <div
               *ngIf="
-                cadastroForm.get('nome').invalid &&
-                cadastroForm.get('nome').dirty &&
-                  cadastroForm.get('nome').touched
+                cadastroForm.get('name').invalid &&
+                cadastroForm.get('name').dirty &&
+                cadastroForm.get('name').touched
               "
               class="alert alert-danger text-center"
             >
-              <div *ngIf="cadastroForm.get('nome').hasError('required')">
+              <div *ngIf="cadastroForm.get('name').hasError('required')">
                 O nome é obrigatório.
               </div>
-              <div *ngIf="cadastroForm.get('nome').hasError('minlength')">
+              <div *ngIf="cadastroForm.get('name').hasError('minlength')">
                 O nome deve ter pelo menos 6 letras.
               </div>
             </div>
@@ -52,7 +52,7 @@
               *ngIf="
                 cadastroForm.get('email').invalid &&
                 cadastroForm.get('email').dirty &&
-                  cadastroForm.get('email').touched
+                cadastroForm.get('email').touched
               "
               class="alert alert-danger text-center"
             >
@@ -67,22 +67,22 @@
           <div class="form-group marb">
             <input
               class="form-control w-75 mx-auto text-center"
-              formControlName="senha"
+              formControlName="password"
               type="password"
               placeholder="Crie uma senha"
             />
             <div
               *ngIf="
-                cadastroForm.get('senha').invalid &&
-                cadastroForm.get('senha').dirty &&
-                  cadastroForm.get('senha').touched
+                cadastroForm.get('password').invalid &&
+                cadastroForm.get('password').dirty &&
+                cadastroForm.get('password').touched
               "
               class="alert alert-danger text-center"
             >
-              <div *ngIf="cadastroForm.get('senha').hasError('required')">
+              <div *ngIf="cadastroForm.get('password').hasError('required')">
                 A senha é obrigatória.
               </div>
-              <div *ngIf="cadastroForm.get('senha').hasError('minlength')">
+              <div *ngIf="cadastroForm.get('password').hasError('minlength')">
                 A senha deve ter pelo menos 6 letras.
               </div>
             </div>
@@ -98,7 +98,7 @@
               *ngIf="
                 cadastroForm.get('passwordConfirmation').invalid &&
                 cadastroForm.get('passwordConfirmation').dirty &&
-                  cadastroForm.get('passwordConfirmation').touched
+                cadastroForm.get('passwordConfirmation').touched
               "
               class="alert alert-danger text-center"
             >
@@ -121,7 +121,7 @@
               *ngIf="
                 cadastroForm.get('passwordConfirmation').dirty &&
                 cadastroForm.get('passwordConfirmation').touched &&
-                !senhasMatch()
+                !passwordsMatch()
               "
               class="alert alert-danger text-center"
             >
@@ -139,7 +139,8 @@
             <div
               *ngIf="
                 cadastroForm.get('cpf').invalid &&
-                cadastroForm.get('cpf').dirty && cadastroForm.get('cpf').touched
+                cadastroForm.get('cpf').dirty &&
+                cadastroForm.get('cpf').touched
               "
               class="alert alert-danger text-center"
             >
@@ -151,26 +152,68 @@
               </div>
             </div>
           </div>
-          <div class="form-group w-75 mx-auto">
-            <label for="dadosBancarios">Dados Bancários</label>:
-            <textarea
-              class="form-control"
-              id="dadosBancarios"
-              rows="5"
-              placeholder="Agência, Conta..."
-              formControlName="dadosBancarios"
-            ></textarea>
+
+          <div class="form-group marb">
+            <input
+              class="form-control w-75 mx-auto text-center"
+              type="text"
+              placeholder="Informe seu banco"
+              style="margin-bottom: -10px"
+              formControlName="bank"
+            />
             <div
               *ngIf="
-                cadastroForm.get('dadosBancarios').invalid &&
-                cadastroForm.get('dadosBancarios').dirty &&
-                  cadastroForm.get('dadosBancarios').touched
+                cadastroForm.get('bank').invalid &&
+                cadastroForm.get('bank').dirty &&
+                cadastroForm.get('bank').touched
               "
               class="alert alert-danger text-center"
             >
-              <div
-                *ngIf="cadastroForm.get('dadosBancarios').hasError('required')"
-              >
+              <div *ngIf="cadastroForm.get('bank').hasError('required')">
+                Campo obrigatório
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group marb">
+            <input
+              class="form-control w-75 mx-auto text-center"
+              type="text"
+              placeholder="Informe sua agência"
+              style="margin-bottom: -10px"
+              formControlName="agency"
+            />
+            <div
+              *ngIf="
+                cadastroForm.get('agency').invalid &&
+                cadastroForm.get('agency').dirty &&
+                cadastroForm.get('agency').touched
+              "
+              class="alert alert-danger text-center"
+            >
+              <div *ngIf="cadastroForm.get('agency').hasError('required')">
+                Campo obrigatório
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group marb">
+            <input
+              class="form-control w-75 mx-auto text-center"
+              type="text"
+              placeholder="Informe sua conta"
+              style="margin-bottom: -10px"
+              formControlName="account"
+            />
+            <div
+              *ngIf="
+                cadastroForm.get('account').invalid &&
+                cadastroForm.get('account').dirty &&
+                cadastroForm.get('account').touched
+              "
+              class="alert alert-danger text-center"
+            >
+              <div *ngIf="cadastroForm.get('account').hasError('required')">
                 Campo obrigatório
               </div>
             </div>
@@ -182,7 +225,7 @@
             type="checkbox"
             value=""
             id="termos"
-            formControlName="termos"
+            formControlName="terms"
           />
           <label class="form-check-label text-primary" for="termos">
             Li e concordo com o termos de uso

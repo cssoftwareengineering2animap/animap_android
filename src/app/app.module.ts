@@ -15,7 +15,7 @@ import { CadastroAnfitriaoComponent } from "./presentation/pages/cadastro-anfitr
 import { CadastroPetComponent } from "./presentation/pages/cadastro-pet/cadastro-pet.component"
 import { HomeComponent } from "./presentation/pages/home/home.component"
 import { RegisterUserComponent } from "./presentation/pages/user/register/register.component"
-import { RegisterUserUseCase } from "./domain/use_cases/user/create_user/register_user_use_case"
+import { CreateUserUseCase } from "./domain/use_cases/user/create_user/create_user_use_case"
 import { HttpErrorInterceptor } from "./infra/http/error_interceptor"
 import { UserRepositoryToken } from "./domain/repositories/user_repository"
 import { RemoteUserRepository } from "./infra/repositories/user_repository"
@@ -60,7 +60,7 @@ import { ResetPasswordUseCase } from "./domain/use_cases/user/forgot_password/re
       multi: true,
     },
     CadastroPetService,
-    RegisterUserUseCase,
+    CreateUserUseCase,
     LoginUseCase,
     RequestForgotPasswordUseCase,
     ResetPasswordUseCase,

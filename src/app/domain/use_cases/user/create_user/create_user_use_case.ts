@@ -6,10 +6,10 @@ import {
   UserRepositoryToken,
 } from "../../../repositories/user_repository"
 import { LoginUseCase } from "../login/login_use_case"
-import { RegisterUserDto } from "./register_user_dto"
+import { CreateUserDto } from "./create_user_dto"
 
 @Injectable()
-export class RegisterUserUseCase {
+export class CreateUserUseCase {
   constructor(
     @Inject(UserRepositoryToken)
     private readonly userRepository: UserRepository,
@@ -19,7 +19,7 @@ export class RegisterUserUseCase {
     private readonly loginUseCase: LoginUseCase
   ) {}
 
-  execute = (data: RegisterUserDto) =>
+  execute = (data: CreateUserDto) =>
     this.userRepository.create(data).pipe(
       tap(({ data: user }) => this.storage.set("user", user)),
       flatMap(() => this.loginUseCase.execute(data))
