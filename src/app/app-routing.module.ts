@@ -1,6 +1,6 @@
-import { SolicitacoesComponent } from './presentation/pages/solicitacoes/solicitacoes.component';
 import { NgModule } from "@angular/core"
 import { Routes, RouterModule } from "@angular/router"
+import { SolicitacoesComponent } from "./presentation/pages/solicitacoes/solicitacoes.component"
 import { MeusPetsComponent } from "./presentation/pages/meus-pets/meus-pets.component"
 import { HomeComponent } from "./presentation/pages/home/home.component"
 import { CadastroAnfitriaoComponent } from "./presentation/pages/cadastro-anfitriao/cadastro-anfitriao.component"

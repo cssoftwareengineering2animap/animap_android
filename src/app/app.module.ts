@@ -1,4 +1,3 @@
-import { AgendamentosComponent } from './presentation/pages/agendamentos/agendamentos.component';
 import { RouterModule } from "@angular/router"
 import { BrowserModule } from "@angular/platform-browser"
 import { NgModule } from "@angular/core"
@@ -10,6 +9,7 @@ import { ConfirmDialogModule } from "primeng/confirmdialog"
 import { ConfirmationService } from "primeng/api"
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations"
 import { DialogModule } from "primeng/dialog"
+import { AgendamentosComponent } from "./presentation/pages/agendamentos/agendamentos.component"
 import { AppRoutingModule } from "./app-routing.module"
 import { AppComponent } from "./app.component"
 import { LoginComponent } from "./presentation/pages/user/login/login.component"
@@ -38,8 +38,12 @@ import { PetRepositoryToken } from "./domain/repositories/pet_repository"
 import { RemotePetRepository } from "./infra/repositories/pet_repository"
 import { CreateHostUseCase } from "./domain/use_cases/host/create_host/create_host_use_case"
 import { HostRepositoryToken } from "./domain/repositories/host_repository"
-import { RemoteHostRepository } from "./infra/repositories/host_repository";
-import { SolicitacoesComponent } from './presentation/pages/solicitacoes/solicitacoes.component'
+import { RemoteHostRepository } from "./infra/repositories/host_repository"
+import { SolicitacoesComponent } from "./presentation/pages/solicitacoes/solicitacoes.component"
+import { GetTourFeedUseCase } from "./domain/use_cases/tour/get_tour_feed/get_tour_feed_use_case"
+import { BlockHostUseCase } from "./domain/use_cases/host/block_host/block_host_use_case"
+import { TourRepositoryToken } from "./domain/repositories/tour_repository"
+import { RemoteTourRepository } from "./infra/repositories/tour_repository"
 
 @NgModule({
   declarations: [
@@ -56,7 +60,7 @@ import { SolicitacoesComponent } from './presentation/pages/solicitacoes/solicit
     PasseiosComponent,
     MeusPetsComponent,
     AgendamentosComponent,
-    SolicitacoesComponent
+    SolicitacoesComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,10 +89,13 @@ import { SolicitacoesComponent } from './presentation/pages/solicitacoes/solicit
     ConfirmationService,
     CreatePetUseCase,
     CreateHostUseCase,
+    GetTourFeedUseCase,
+    BlockHostUseCase,
     { provide: UserRepositoryToken, useClass: RemoteUserRepository },
     { provide: StorageToken, useClass: NativeStorageProvider },
     { provide: PetRepositoryToken, useClass: RemotePetRepository },
     { provide: HostRepositoryToken, useClass: RemoteHostRepository },
+    { provide: TourRepositoryToken, useClass: RemoteTourRepository },
   ],
   bootstrap: [AppComponent],
 })

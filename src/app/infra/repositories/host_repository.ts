@@ -34,4 +34,15 @@ export class RemoteHostRepository implements HostRepository {
         )
       )
     )
+
+  blockHost = (hostId: string) =>
+    from(this.storage.get<string>("token")).pipe(
+      flatMap(token =>
+        this.http.post<void>(
+          `${environment.apiUrl}/hosts/${hostId}/blockings`,
+          {},
+          { headers: { Authorization: token } }
+        )
+      )
+    )
 }

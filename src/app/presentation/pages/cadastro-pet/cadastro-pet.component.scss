@@ -51,10 +51,33 @@ fa-icon {
   font-size: 26px;
 }
 
-html body {
-  background-color: red !important;
+p-fileupload {
+  ::ng-deep {
+    .p-fileupload-content {
+      opacity: 0;
+      z-index: -1;
+      position: absolute;
+    }
+    .p-fileupload {
+      opacity: 0;
+      width: -webkit-fill-available;
+      top: 5px;
+      left: 0px;
+      position: absolute;
+    }
+  }
 }
 
-body {
-  background-color: red !important;
+#pet-photo {
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+  border-radius: 100px;
+  padding: 2px;
+}
+
+#input-photo {
+  position: absolute;
+  opacity: 0;
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
 }
