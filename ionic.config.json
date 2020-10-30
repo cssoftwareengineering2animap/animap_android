@@ -1,0 +1,7 @@
+{
+  "name": "animap_ionic_native",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

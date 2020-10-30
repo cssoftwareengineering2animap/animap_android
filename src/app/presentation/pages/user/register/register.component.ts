@@ -2,7 +2,8 @@ import { Router } from "@angular/router"
 import { Component, OnInit } from "@angular/core"
 import { FormBuilder, FormGroup, Validators } from "@angular/forms"
 import { CreateUserUseCase } from "../../../../domain/use_cases/user/create_user/create_user_use_case"
-import { Failure } from "../../../../core/types/failure"
+import { Failure } from 'src/app/core/types/failure'
+
 
 @Component({
   selector: "app-register-user",
@@ -17,7 +18,7 @@ export class RegisterUserComponent implements OnInit {
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly route: Router,
-    private readonly CreateUserUseCase: CreateUserUseCase
+    private readonly createUserUseCase: CreateUserUseCase
   ) {}
 
   ngOnInit() {
@@ -47,7 +48,7 @@ export class RegisterUserComponent implements OnInit {
     const email = this.registrationForm.get("email")?.value as string
     const password = this.registrationForm.get("password")?.value as string
 
-    this.CreateUserUseCase.execute({ name, email, password }).subscribe(
+    this.createUserUseCase.execute({ name, email, password }).subscribe(
       () => this.route.navigate(["/cadastro-pet"]),
       ([error]: Failure[]) => {
         this.errorMessage = error.message
