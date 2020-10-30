@@ -16,21 +16,41 @@
     <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()">
       <div class="row mt-1">
         <div class="col-4">
-          <div class="image border-warning d-flex flex-column justify-content-center align-items-center">
-            <input id="input-photo" type="file" formControlName="urlFoto" (change)="onFileChange($event)">
-            <!-- <fa-icon class="text-secondary" [icon]="faImage"></fa-icon> -->
-            <img id="pet-photo" [src]="url">
+          <div
+            class="image border-warning d-flex flex-column justify-content-center align-items-center"
+          >
+            <input
+              id="input-photo"
+              type="file"
+              formControlName="urlFoto"
+              accept="image/png, image/jpeg image/jpg"
+              (change)="onFileChange($event)"
+            />
+
+            <img id="pet-photo" [src]="url" alt="Foto do pet" />
           </div>
         </div>
         <div class="col-8 d-flex flex-column justify-content-center">
           <div class="form-group">
-            <label for="nomeAnimal"><b>Nome do Animal </b><span class="align-top text-warning">*</span></label>
-            <input type="text" class="form-control" id="nomeAnimal" placeholder="Xuxu" formControlName="nome" />
-            <div *ngIf="
+            <label for="nomeAnimal"
+              ><b>Nome do Animal </b
+              ><span class="align-top text-warning">*</span></label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="nomeAnimal"
+              placeholder="Xuxu"
+              formControlName="nome"
+            />
+            <div
+              *ngIf="
                 cadastroForm.get('nome').invalid &&
                 (cadastroForm.get('nome').dirty ||
                   cadastroForm.get('nome').touched)
-              " class="alert alert-danger text-center">
+              "
+              class="alert alert-danger text-center"
+            >
               <div *ngIf="cadastroForm.get('nome').hasError('required')">
                 O nome é obrigatório.
               </div>
@@ -39,18 +59,24 @@
         </div>
       </div>
       <div class="form-group mt-1">
-        <label for="tipoAnimal"><b>Tipo do Animal </b><span class="align-top text-warning">*</span></label>
+        <label for="tipoAnimal"
+          ><b>Tipo do Animal </b
+          ><span class="align-top text-warning">*</span></label
+        >
         <select class="form-control" id="tipoAnimal" formControlName="tipo">
           <option [ngValue]="null" hidden>Selecione...</option>
           <option *ngFor="let animal of animais" [ngValue]="animal">
             {{ animal }}
           </option>
         </select>
-        <div *ngIf="
+        <div
+          *ngIf="
             cadastroForm.get('tipo').invalid &&
             cadastroForm.get('tipo').dirty &&
             cadastroForm.get('tipo').touched
-          " class="alert alert-danger text-center">
+          "
+          class="alert alert-danger text-center"
+        >
           <div *ngIf="cadastroForm.get('tipo').hasError('required')">
             Tipo Obrigatório
           </div>
@@ -58,24 +84,47 @@
       </div>
       <div class="form-group mt-1">
         <label for="racaAnimal"><b>Raça do Animal</b></label>
-        <input type="text" class="form-control" id="racaAnimal" formControlName="raca" placeholder="ex: Beagle" />
+        <input
+          type="text"
+          class="form-control"
+          id="racaAnimal"
+          formControlName="raca"
+          placeholder="ex: Beagle"
+        />
       </div>
       <div class="form-group mt-1">
         <label for="animalAge"><b>Idade do Animal</b></label>
-        <input type="number" min="0" max="100" step="1" class="form-control" id="animalAge" formControlName="age"
-          placeholder="3" />
+        <input
+          type="number"
+          min="0"
+          max="100"
+          step="1"
+          class="form-control"
+          id="animalAge"
+          formControlName="age"
+          placeholder="3"
+        />
       </div>
       <div class="form-group">
         <label for="observacoes"><b>Observações</b></label>
-        <textarea class="form-control" id="observacoes" rows="3" formControlName="observacoes"
-          placeholder="Doenças, alergias, medos e etc..."></textarea>
+        <textarea
+          class="form-control"
+          id="observacoes"
+          rows="3"
+          formControlName="observacoes"
+          placeholder="Doenças, alergias, medos e etc..."
+        ></textarea>
       </div>
       <div *ngIf="errorMessage" class="alert alert-danger text-center">
         {{ errorMessage }}
       </div>
       <div class="botao d-flex justify-content-center">
-        <button [disabled]="cadastroForm.invalid" type="submit" class="btn btn-dark text-light font-weight-bold"
-          id="btnCadastrar">
+        <button
+          [disabled]="cadastroForm.invalid"
+          type="submit"
+          class="btn btn-dark text-light font-weight-bold"
+          id="btnCadastrar"
+        >
           Cadastrar
         </button>
       </div>

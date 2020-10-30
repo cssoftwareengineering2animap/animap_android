@@ -1,27 +1,36 @@
 import { Injectable } from "@angular/core"
 import { Storage } from "../../domain/providers/storage"
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { Platform } from '@ionic/angular';
 
 @Injectable()
 export class NativeStorageProvider implements Storage {
-  set = <T>(key: string, value: T) =>
-    Promise.resolve(
-      localStorage.setItem(
-        key,
-        typeof value === "string" ? value : JSON.stringify(value)
-      )
-    )
+  private storage: globalThis.Storage | NativeStorage
 
-  get = <T>(key: string) => {
-    const value = localStorage.getItem(key)
+  constructor(
+    private readonly nativeStorage: NativeStorage,
+    private readonly platform: Platform) { 
+      this.storage = this.platform.is("cordova") ? this.nativeStorage : localStorage
+    }
+
+  set =async  <T>(key: string, value: T) => {
+    await this.storage.setItem(
+      key,
+      typeof value === "string" ? value : JSON.stringify(value)
+    )
+  }
+      
+
+  get = async <T>(key: string) => {
+    const value = await this.storage.getItem(key)
     if (!value) {
       return null
     }
 
     try {
-      const parsedValue = JSON.parse(value) as T
-      return Promise.resolve(parsedValue)
+      return JSON.parse(value) as T
     } catch (error) {
-      return Promise.resolve((value as unknown) as T)
+      return (value as unknown) as T
     }
   }
 

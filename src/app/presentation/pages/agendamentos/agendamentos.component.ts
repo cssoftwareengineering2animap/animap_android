@@ -26,8 +26,8 @@ export class AgendamentosComponent implements OnInit {
   confirm(nomeAnimal: string) {
     this.confirmationService.confirm({
       message: `Deseja agendar um passeio com ${nomeAnimal}?`,
-      acceptLabel: 'Sim',
-      rejectLabel: 'Não',
+      acceptLabel: "Sim",
+      rejectLabel: "Não",
       accept: () => {
         // Actual logic to perform a confirmation
       },
