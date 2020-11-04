@@ -2,8 +2,7 @@ import { Router } from "@angular/router"
 import { Component, OnInit } from "@angular/core"
 import { FormBuilder, FormGroup, Validators } from "@angular/forms"
 import { CreateUserUseCase } from "../../../../domain/use_cases/user/create_user/create_user_use_case"
-import { Failure } from 'src/app/core/types/failure'
-
+import { Failure } from "../../../../core/types/failure"
 
 @Component({
   selector: "app-register-user",
