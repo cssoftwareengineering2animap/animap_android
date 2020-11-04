@@ -1,3 +1,4 @@
+import { ISODate } from "../../core/types/iso_date"
 import { Entity } from "./entity"
 import { Host } from "./host_entity"
 import { Pet } from "./pet_entity"
@@ -10,7 +11,7 @@ export enum TourStatus {
 }
 
 export interface Tour extends Entity {
-  scheduledFor: Date
+  scheduledFor: ISODate
   tip: string
   pet: Pet
   host: Host

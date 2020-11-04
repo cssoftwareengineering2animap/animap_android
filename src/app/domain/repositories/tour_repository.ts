@@ -4,7 +4,12 @@ import { Host } from "../entities/host_entity"
 import { Pet } from "../entities/pet_entity"
 import { Tour } from "../entities/tour_entity"
 
-export type TourFeed = Tour & Pick<Host, "name"> & Pick<Pet, "name">
+export type TourFeed = Omit<
+  Tour,
+  "pet" | "host" | "createdAt" | "updatedAt"
+> & {
+  host: Pick<Host, "id" | "name"> & { completedTourCount: number }
+} & { pet: Pick<Pet, "name"> }
 
 export interface TourRepository {
   getFeed: () => Observable<Envelope<TourFeed[]>>
