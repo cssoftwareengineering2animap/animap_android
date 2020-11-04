@@ -49,9 +49,13 @@ export class LoginComponent implements OnInit {
   }
 
   addOrangeBackground() {
-    if (document.querySelector("body")) {
-      document.querySelector("body").style.background = "#ffc107"
+    const body = document.querySelector("body")
+
+    if (!body) {
+      return
     }
+
+    body.style.background = "#ffc107"
   }
 
   onSubmit() {

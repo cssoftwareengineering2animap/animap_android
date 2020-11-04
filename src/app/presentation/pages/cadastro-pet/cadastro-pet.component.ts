@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core"
 import { FormBuilder, FormGroup, Validators } from "@angular/forms"
 import { faImage, faPaw } from "@fortawesome/free-solid-svg-icons"
 import { Router } from "@angular/router"
+import { Camera, CameraOptions } from "@ionic-native/camera/ngx"
+import base64ToBlob from "b64-to-blob"
 import { CreatePetUseCase } from "../../../domain/use_cases/pet/create_pet/create_pet_use_case"
 import { Failure } from "../../../core/types/failure"
 
@@ -23,10 +25,13 @@ export class CadastroPetComponent implements OnInit {
 
   errorMessage = ""
 
+  petBase64Photo = ""
+
   constructor(
-    private formBuilder: FormBuilder,
-    private route: Router,
-    private readonly createPetUseCase: CreatePetUseCase
+    private readonly formBuilder: FormBuilder,
+    private readonly route: Router,
+    private readonly createPetUseCase: CreatePetUseCase,
+    private readonly camera: Camera
   ) {}
 
   ngOnInit(): void {
@@ -36,9 +41,26 @@ export class CadastroPetComponent implements OnInit {
       raca: this.formBuilder.control(""),
       observacoes: this.formBuilder.control(""),
       age: this.formBuilder.control(""),
-      urlFoto: this.formBuilder.control(""),
     })
     this.addClass()
+  }
+
+  getPetPhoto = async () => {
+    const options: CameraOptions = {
+      quality: 100,
+      targetHeight: 300,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      saveToPhotoAlbum: false,
+      allowEdit: true,
+    }
+
+    this.petBase64Photo = await this.camera
+      .getPicture(options)
+      .then((data: string) => `data:image/jpeg;base64,${data}`)
   }
 
   onSubmit() {
@@ -48,28 +70,27 @@ export class CadastroPetComponent implements OnInit {
     const observations = this.cadastroForm.get("observacoes").value
     const age = this.cadastroForm.get("age").value || 3
 
-    const urlFoto = this.cadastroForm.get("urlFoto").value // add back-end
-    console.log(urlFoto)
-    console.log(" aaaaaa", this.cadastroForm.get("urlFoto"))
+    const blob = base64ToBlob(this.petBase64Photo)
+
+    const formData = new FormData()
+
+    formData.append("file", blob)
+
     this.createPetUseCase
-      .execute({ name, type, race, observations, age })
+      .execute({
+        name,
+        type,
+        race,
+        observations,
+        age,
+        photo: formData,
+      })
       .subscribe(
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         _pet => this.route.navigate(["/home"]),
         ([error]: Failure[]) => {
           this.errorMessage = error.message
         }
       )
-  }
-
-  onFileChange(event) {
-    if (event.target.files) {
-      const reader = new FileReader()
-      reader.readAsDataURL(event.target.files[0])
-      reader.onload = (event: any) => {
-        this.url = event.target.result
-      }
-    }
   }
 
   addClass() {
