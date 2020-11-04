@@ -21,11 +21,17 @@
     "no-shadow": "off",
     "no-console": "off",
     "no-unused-vars": [2, { "args": "all", "argsIgnorePattern": "^_+" }],
+    "@typescript-eslint/no-unused-vars": [
+      2,
+      { "args": "all", "argsIgnorePattern": "^_+" }
+    ],
     "import/prefer-default-export": "off",
     "no-underscore-dangle": "off",
     "class-methods-use-this": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
-    "@typescript-eslint/unbound-method": "off"
+    "@typescript-eslint/unbound-method": "off",
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off"
   },
   "settings": {
     "import/parsers": {
