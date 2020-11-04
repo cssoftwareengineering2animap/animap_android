@@ -1,10 +1,11 @@
 import { ConfirmationService } from "primeng/api"
 import { Component, OnInit } from "@angular/core"
 import { faBars, faBan, faComment } from "@fortawesome/free-solid-svg-icons"
-import { Passeio } from "./models/passeio.model"
 import { GetTourFeedUseCase } from "../../../domain/use_cases/tour/get_tour_feed/get_tour_feed_use_case"
 import { TourFeed } from "../../../domain/repositories/tour_repository"
 import { BlockHostUseCase } from "../../../domain/use_cases/host/block_host/block_host_use_case"
+import { Host } from "../../../domain/entities/host_entity"
+import { TourStatus } from "../../../domain/entities/tour_entity"
 
 @Component({
   selector: "app-passeios",
@@ -12,8 +13,6 @@ import { BlockHostUseCase } from "../../../domain/use_cases/host/block_host/bloc
   styleUrls: ["./passeios.component.scss"],
 })
 export class PasseiosComponent implements OnInit {
-  public passeios: Passeio[]
-
   tours: TourFeed[]
 
   faBars = faBars
@@ -26,51 +25,55 @@ export class PasseiosComponent implements OnInit {
 
   public display = false
 
-  public toggle() {
-    this.dropdownToggle = !this.dropdownToggle
-  }
-
   constructor(
     private confirmationService: ConfirmationService,
     private readonly getTourFeedUseCase: GetTourFeedUseCase,
     private readonly blockHostUseCase: BlockHostUseCase
-  ) {
-    this.passeios = [
-      new Passeio(1, 1, 12, 1, 25, "Marcelo", "Bilu", "24/10/2020 13:40"),
-      new Passeio(
-        2,
-        1,
-        19,
-        0,
-        34.99,
-        "Luís Fernando",
-        "Romeu",
-        "02/10/2020 15:30"
-      ),
-    ]
-  }
+  ) {}
 
   ngOnInit() {
     this.getTourFeedUseCase.execute().subscribe(({ data: tours }) => {
-      this.tours = tours
+      this.tours = [
+        {
+          pet: {
+            name: "Bobby",
+          },
+          scheduledFor: "2021-05-12 01:28:10",
+          tip: "60",
+          status: TourStatus.pending,
+          host: {
+            id: "a2f19364-44ff-46fe-967e-ccb7184c4f68",
+            name: "Asha.Towne",
+            completedTourCount: 10,
+          },
+          id: "06f648a4-9f4e-489f-b100-ae6f4bf55b47",
+        },
+      ]
+      // this.tours = tours
     })
+  }
+
+  public toggle() {
+    this.dropdownToggle = !this.dropdownToggle
   }
 
   showDialog() {
     this.display = true
   }
 
-  confirm(nomeAnfitriao: string) {
+  confirm(host: Pick<Host, "id" | "name">) {
     this.confirmationService.confirm({
-      message: `Tem certeza que deseja bloquear ${nomeAnfitriao}?`,
+      message: `Tem certeza que deseja bloquear ${host.name}?`,
       acceptLabel: "Sim",
       rejectLabel: "Não",
-      accept: x => console.log("aaaaa", x),
-      // Actual logic to perform a confirmation
+      accept: () =>
+        this.blockHostUseCase.execute(host.id).subscribe(() => {
+          this.tours = this.tours.filter(tour => tour.host.id !== host.id)
+        }),
     })
   }
 
-  public getHora(data: string) {
+  public getHour(data: string) {
     const indice = data.indexOf(":")
     const hora = data.slice(indice - 2, indice)
     const minutos = data.slice(indice + 1, indice + 3)
@@ -78,7 +81,15 @@ export class PasseiosComponent implements OnInit {
     return `${hora}:${minutos}`
   }
 
-  public getData(data: string) {
+  public getDate(data: string) {
     return `${data.slice(0, 10)}`
   }
+
+  formatCurrency = (tip: string) => Number(tip).toFixed(2).replace(".", ",")
+
+  isTourPending = (tour: Pick<TourFeed, "status">) =>
+    tour.status === TourStatus.pending
+
+  isTourCompleted = (tour: Pick<TourFeed, "status">) =>
+    tour.status === TourStatus.completed
 }
