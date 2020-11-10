@@ -25,7 +25,7 @@ export class CadastroPetComponent implements OnInit {
 
   errorMessage = ""
 
-  petBase64Photo = ""
+  base64PetPhoto = ""
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -58,23 +58,30 @@ export class CadastroPetComponent implements OnInit {
       allowEdit: true,
     }
 
-    this.petBase64Photo = await this.camera
+    this.base64PetPhoto = await this.camera
       .getPicture(options)
-      .then((data: string) => `data:image/jpeg;base64,${data}`)
+      .then(this.addBase64ImagePrefix)
   }
 
-  onSubmit() {
-    const name = this.cadastroForm.get("nome").value
-    const type = this.cadastroForm.get("tipo").value
-    const race = this.cadastroForm.get("raca").value
-    const observations = this.cadastroForm.get("observacoes").value
-    const age = this.cadastroForm.get("age").value || 3
+  private addBase64ImagePrefix = (base64Image: string) =>
+    `data:image/jpeg;base64,${base64Image}`
 
-    const blob = base64ToBlob(this.petBase64Photo)
+  private getFormDataWithPetPhoto = () => {
+    const blob = base64ToBlob(this.base64PetPhoto)
 
     const formData = new FormData()
 
     formData.append("file", blob)
+
+    return formData
+  }
+
+  onSubmit() {
+    const name = this.cadastroForm.get("nome")?.value
+    const type = this.cadastroForm.get("tipo")?.value
+    const race = this.cadastroForm.get("raca")?.value
+    const observations = this.cadastroForm.get("observacoes")?.value
+    const age = this.cadastroForm.get("age")?.value || 3
 
     this.createPetUseCase
       .execute({
@@ -83,7 +90,7 @@ export class CadastroPetComponent implements OnInit {
         race,
         observations,
         age,
-        photo: formData,
+        photo: this.getFormDataWithPetPhoto(),
       })
       .subscribe(
         _pet => this.route.navigate(["/home"]),
@@ -94,6 +101,12 @@ export class CadastroPetComponent implements OnInit {
   }
 
   addClass() {
-    document.querySelector("body").style.background = "#fff"
+    const body = document.querySelector("body")
+
+    if (!body) {
+      return
+    }
+
+    body.style.background = "#fff"
   }
 }

@@ -1,8 +1,9 @@
 export class Solicitacao {
-  //Identificador
+  // Identificador
   public cdSolicitacao: number
 
   public nmPet: string
+
   public nmAnfitriao: string
 
   constructor(cdSolicitacao: number, nmPet: string, nmAnfitriao: string) {

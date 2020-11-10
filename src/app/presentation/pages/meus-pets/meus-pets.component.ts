@@ -14,13 +14,19 @@ import { Pet } from "./models/pet.model"
 })
 export class MeusPetsComponent implements OnInit {
   public pets: Pet[]
-  display: boolean = false
+
+  display = false
+
   faBars = faBars
+
   faPlusCircle = faPlusCircle
+
   faImage = faImage
+
   public dropdownToggle = false
 
   animais = ["Cachorro", "Gato"]
+
   errorMessage = ""
 
   public cadastroForm: FormGroup
@@ -42,6 +48,7 @@ export class MeusPetsComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
   public toggle() {
     this.dropdownToggle = !this.dropdownToggle
   }
@@ -76,8 +83,8 @@ export class MeusPetsComponent implements OnInit {
     const observations = this.cadastroForm.get("observacoes").value
     const age = this.cadastroForm.get("age").value || 3
 
-    let newPet = new Pet(id, age, name, race, observations, type);
-    console.log(newPet);
+    const newPet = new Pet(id, age, name, race, observations, type)
+    console.log(newPet)
 
     // Logica para edição no banco
   }

@@ -12,6 +12,7 @@ export class SolicitacoesComponent implements OnInit {
   public solicitacoes: Solicitacao[]
 
   faBars = faBars
+
   public dropdownToggle = false
 
   constructor(private confirmationService: ConfirmationService) {
@@ -28,12 +29,13 @@ export class SolicitacoesComponent implements OnInit {
       acceptLabel: "Sim",
       rejectLabel: "Não",
       accept: () => {
-        //Actual logic to perform a confirmation
+        // Actual logic to perform a confirmation
       },
     })
   }
 
   ngOnInit(): void {}
+
   public toggle() {
     this.dropdownToggle = !this.dropdownToggle
   }
