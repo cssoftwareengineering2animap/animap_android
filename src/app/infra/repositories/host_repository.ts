@@ -30,7 +30,8 @@ export class RemoteHostRepository implements HostRepository {
         this.http.post<Envelope<BankAccount>>(
           `${environment.apiUrl}/bank_accounts`,
           data,
-          { headers: { Authorization: token } }
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          { headers: { Authorization: token! } }
         )
       )
     )
@@ -41,7 +42,8 @@ export class RemoteHostRepository implements HostRepository {
         this.http.post<void>(
           `${environment.apiUrl}/hosts/${hostId}/blockings`,
           {},
-          { headers: { Authorization: token } }
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          { headers: { Authorization: token! } }
         )
       )
     )

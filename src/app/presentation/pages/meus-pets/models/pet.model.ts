@@ -16,8 +16,8 @@ export class Pet {
     idadePet: string,
     nmPet: string,
     racaPet: string,
-    obsPet: ?string,
-    tipoPet: ?string
+    obsPet: string,
+    tipoPet: string
   ) {
     this.idPet = idPet
     this.idadePet = idadePet

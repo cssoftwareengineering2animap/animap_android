@@ -9,7 +9,13 @@ export class Pet {
 
   public racaPet: string
 
-  constructor(idPet, idUsuario, idadePet, nmPet, racaPet) {
+  constructor(
+    idPet: number,
+    idUsuario: number,
+    idadePet: number,
+    nmPet: string,
+    racaPet: string
+  ) {
     this.idPet = idPet
     this.idUsuario = idUsuario
     this.idadePet = idadePet

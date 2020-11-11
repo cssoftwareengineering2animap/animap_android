@@ -49,13 +49,13 @@ export class CadastroAnfitriaoComponent implements OnInit {
   }
 
   onSubmit() {
-    const name = this.cadastroForm.get("name").value
-    const email = this.cadastroForm.get("email").value
-    const password = this.cadastroForm.get("password").value
-    const cpf = this.cadastroForm.get("cpf").value
-    const bank = this.cadastroForm.get("bank").value
-    const agency = this.cadastroForm.get("agency").value
-    const account = this.cadastroForm.get("account").value
+    const name = this.cadastroForm.get("name")?.value
+    const email = this.cadastroForm.get("email")?.value
+    const password = this.cadastroForm.get("password")?.value
+    const cpf = this.cadastroForm.get("cpf")?.value
+    const bank = this.cadastroForm.get("bank")?.value
+    const agency = this.cadastroForm.get("agency")?.value
+    const account = this.cadastroForm.get("account")?.value
 
     this.createHostUseCase
       .execute({
@@ -78,12 +78,20 @@ export class CadastroAnfitriaoComponent implements OnInit {
   }
 
   addClass() {
-    if (document.querySelector("body")) {
-      document.querySelector("body").style.background = "#ffc107"
+    const body = document.querySelector("body")
+
+    if (!body) {
+      return
     }
+
+    body.style.background = "#ffc107"
   }
 
-  passwordsMatch = () =>
-    this.cadastroForm.get("password").value ===
-    this.cadastroForm.get("passwordConfirmation").value
+  passwordsMatch = () => {
+    const password = this.cadastroForm.get("password")?.value
+    const passwordConfirmation = this.cadastroForm.get("passwordConfirmation")
+      ?.value
+
+    return password && passwordConfirmation && password === passwordConfirmation
+  }
 }

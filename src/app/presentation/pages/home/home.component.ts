@@ -14,6 +14,12 @@ export class HomeComponent implements OnInit {
   }
 
   addClass() {
-    document.querySelector("body").style.background = "#fff"
+    const body = document.querySelector("body")
+
+    if (!body) {
+      return
+    }
+
+    body.style.background = "#fff"
   }
 }

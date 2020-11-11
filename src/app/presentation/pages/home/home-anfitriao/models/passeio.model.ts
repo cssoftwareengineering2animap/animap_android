@@ -1,26 +1,26 @@
 export class Passeio {
-  public idAnfitriao: number
+  public idAnfitriao: string
 
-  public idUsuario: number
+  public idUsuario: string
 
-  public idPet: number
+  public idPet: string
 
   public nmPet: string
 
   public dtPasseio: string
 
-  public nrIdade: number
+  public nrIdade: string
 
   public dsRaca: string
 
   constructor(
-    idAnfitriao,
-    idUsuario,
-    idPet,
-    nmPet,
-    dtPasseio,
-    nrIdade,
-    dsRaca
+    idAnfitriao: string,
+    idUsuario: string,
+    idPet: string,
+    nmPet: string,
+    dtPasseio: string,
+    nrIdade: string,
+    dsRaca: string
   ) {
     this.idAnfitriao = idAnfitriao
     this.idUsuario = idUsuario

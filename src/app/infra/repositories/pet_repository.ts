@@ -21,7 +21,8 @@ export class RemotePetRepository implements PetRepository {
     from(this.storage.get<string>("token")).pipe(
       flatMap(token =>
         this.http.post<Envelope<Pet>>(`${environment.apiUrl}/pets`, data, {
-          headers: { Authorization: token },
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          headers: { Authorization: token! },
         })
       )
     )

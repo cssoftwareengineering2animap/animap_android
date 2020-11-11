@@ -47,15 +47,9 @@ export class CadastroPetComponent implements OnInit {
 
   getPetPhoto = async () => {
     const options: CameraOptions = {
-      quality: 100,
-      targetHeight: 300,
-      destinationType: this.camera.DestinationType.DATA_URL,
+      destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
-      correctOrientation: true,
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      saveToPhotoAlbum: false,
-      allowEdit: true,
     }
 
     this.base64PetPhoto = await this.camera

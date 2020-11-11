@@ -15,8 +15,8 @@ export class HomeAnfitriaoComponent implements OnInit {
 
   constructor() {
     this.passeios = [
-      new Passeio(1, 1, 1, "Thor", "24/10/2020 17:50", 2, "Pitbull"),
-      new Passeio(2, 2, 2, "Pablo", "24/10/2020 13:50", 3, "Kocker"),
+      new Passeio("1", "1", "1", "Thor", "24/10/2020 17:50", "2", "Pitbull"),
+      new Passeio("2", "2", "2", "Pablo", "24/10/2020 13:50", "3", "Kocker"),
     ]
   }
 
@@ -35,6 +35,6 @@ export class HomeAnfitriaoComponent implements OnInit {
   }
 
   public getIdade(idade: number) {
-    return `${idade} ${idade == 1 ? "ano" : "anos"}`
+    return `${idade} ${idade === 1 ? "ano" : "anos"}`
   }
 }
