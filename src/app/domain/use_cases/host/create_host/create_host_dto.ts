@@ -1,4 +1,4 @@
-import { Host } from "../../../entities/host_entity"
+import { Host } from "../../../entities/host"
 
 export type RegisterBankAccountDto = {
   bank: string

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core"
+import { NativeStorage } from "@ionic-native/native-storage/ngx"
+import { Platform } from "@ionic/angular"
 import { Storage } from "../../domain/providers/storage"
-import { NativeStorage } from '@ionic-native/native-storage/ngx';
-import { Platform } from '@ionic/angular';
 
 @Injectable()
 export class NativeStorageProvider implements Storage {
@@ -9,17 +9,19 @@ export class NativeStorageProvider implements Storage {
 
   constructor(
     private readonly nativeStorage: NativeStorage,
-    private readonly platform: Platform) { 
-      this.storage = this.platform.is("cordova") ? this.nativeStorage : localStorage
-    }
+    private readonly platform: Platform
+  ) {
+    this.storage = this.platform.is("cordova")
+      ? this.nativeStorage
+      : localStorage
+  }
 
-  set =async  <T>(key: string, value: T) => {
+  set = async <T>(key: string, value: T) => {
     await this.storage.setItem(
       key,
       typeof value === "string" ? value : JSON.stringify(value)
     )
   }
-      
 
   get = async <T>(key: string) => {
     const value = await this.storage.getItem(key)

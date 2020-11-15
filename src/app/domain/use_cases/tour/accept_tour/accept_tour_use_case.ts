@@ -5,11 +5,11 @@ import {
 } from "../../../repositories/tour_repository"
 
 @Injectable()
-export class GetTourFeedUseCase {
+export class AcceptTourUseCase {
   constructor(
     @Inject(TourRepositoryToken)
     private readonly tourRepository: TourRepository
   ) {}
 
-  execute = this.tourRepository.getTours
+  execute = this.tourRepository.acceptTour
 }

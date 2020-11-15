@@ -22,12 +22,15 @@
             <input
               id="input-photo"
               type="file"
-              formControlName="urlFoto"
               accept="image/png, image/jpeg image/jpg"
-              (change)="onFileChange($event)"
+              (click)="getPetPhoto()"
             />
 
-            <img id="pet-photo" [src]="url" alt="Foto do pet" />
+            <img
+              id="pet-photo"
+              src="../../../../assets/imagens/upload-icon.png"
+              alt="Foto do pet"
+            />
           </div>
         </div>
         <div class="col-8 d-flex flex-column justify-content-center">
@@ -120,7 +123,7 @@
       </div>
       <div class="botao d-flex justify-content-center">
         <button
-          [disabled]="cadastroForm.invalid"
+          [disabled]="cadastroForm.invalid || !base64PetPhoto"
           type="submit"
           class="btn btn-dark text-light font-weight-bold"
           id="btnCadastrar"

@@ -1,8 +1,8 @@
 import { Observable } from "rxjs"
 import { Envelope } from "../../core/types/envelope"
 import { ID } from "../../core/types/id"
-import { BankAccount } from "../entities/bank_account_entity"
-import { Host } from "../entities/host_entity"
+import { BankAccount } from "../entities/bank_account"
+import { Host } from "../entities/host"
 import {
   CreateHostDto,
   RegisterBankAccountDto,

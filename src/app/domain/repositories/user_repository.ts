@@ -1,6 +1,6 @@
 import { Observable } from "rxjs"
 import { Envelope } from "../../core/types/envelope"
-import { User } from "../entities/user_entity"
+import { User } from "../entities/user"
 import { CreateUserDto } from "../use_cases/user/create_user/create_user_dto"
 
 import { ResetPasswordDto } from "../use_cases/user/forgot_password/reset_password/reset_password_dto"

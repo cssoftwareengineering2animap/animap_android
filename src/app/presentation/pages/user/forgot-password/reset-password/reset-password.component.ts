@@ -31,7 +31,7 @@ export class ResetPasswordComponent implements OnInit {
     private readonly route: Router,
     private readonly loginUseCase: LoginUseCase
   ) {
-    this.email = this.route.getCurrentNavigation().extras.state.email
+    this.email = this.route.getCurrentNavigation()?.extras?.state?.email
   }
 
   ngOnInit(): void {
@@ -39,6 +39,7 @@ export class ResetPasswordComponent implements OnInit {
       token: this.fb.control("", Validators.required),
       password: this.fb.control("", Validators.required),
     })
+
     this.addOrangeBackground()
   }
 
@@ -47,9 +48,13 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   addOrangeBackground() {
-    if (document.querySelector("body")) {
-      document.querySelector("body").style.background = "#ffc107"
+    const body = document.querySelector("body")
+
+    if (!body) {
+      return
     }
+
+    body.style.background = "#ffc107"
   }
 
   onSubmit() {

@@ -1,7 +1,7 @@
 import { ISODate } from "../../core/types/iso_date"
 import { Entity } from "./entity"
-import { Host } from "./host_entity"
-import { Pet } from "./pet_entity"
+import { Host } from "./host"
+import { Pet } from "./pet"
 
 export enum TourStatus {
   pending = "pending",

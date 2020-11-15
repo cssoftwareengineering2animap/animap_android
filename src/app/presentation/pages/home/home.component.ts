@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core"
 import { faBars } from "@fortawesome/free-solid-svg-icons"
 
 @Component({
@@ -7,7 +7,6 @@ import { faBars } from "@fortawesome/free-solid-svg-icons"
   styleUrls: ["./home.component.scss"],
 })
 export class HomeComponent implements OnInit {
-
   faBars = faBars
 
   ngOnInit(): void {
@@ -15,6 +14,12 @@ export class HomeComponent implements OnInit {
   }
 
   addClass() {
-    document.querySelector("body").style.background = "#fff"
+    const body = document.querySelector("body")
+
+    if (!body) {
+      return
+    }
+
+    body.style.background = "#fff"
   }
 }

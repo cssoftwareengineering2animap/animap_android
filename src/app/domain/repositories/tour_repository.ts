@@ -1,8 +1,6 @@
 import { Observable } from "rxjs"
 import { Envelope } from "../../core/types/envelope"
-import { Host } from "../entities/host_entity"
-import { Pet } from "../entities/pet_entity"
-import { Tour } from "../entities/tour_entity"
+import { Tour, Pet, Host } from "../entities"
 
 export type TourFeed = Omit<
   Tour,
@@ -13,6 +11,8 @@ export type TourFeed = Omit<
 
 export interface TourRepository {
   getFeed: () => Observable<Envelope<TourFeed[]>>
+  getTours: (query?: Pick<Tour, "status">) => Observable<Envelope<Tour[]>>
+  acceptTour: (tour: Tour) => Observable<Envelope<Tour>>
 }
 
 export const TourRepositoryToken = "TourRepository"

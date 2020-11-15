@@ -14,23 +14,24 @@ import { Pet } from "./models/pet.model"
 })
 export class MeusPetsComponent implements OnInit {
   public pets: Pet[]
-  display: boolean = false
+
+  display = false
+
   faBars = faBars
+
   faPlusCircle = faPlusCircle
+
   faImage = faImage
+
   public dropdownToggle = false
 
   animais = ["Cachorro", "Gato"]
+
   errorMessage = ""
 
   public cadastroForm: FormGroup
 
   constructor(private formBuilder: FormBuilder) {
-    this.pets = [
-      new Pet(1, 2, "Bob", "Pastor Alemão", "Observacao Teste", "Cachorro"),
-      new Pet(2, 1, "Pablo", "Cocker", "Observacao Teste", "Cachorro"),
-      new Pet(3, 2, "Romeu", "Beagle", "Observacao Teste", "Gato"),
-    ]
     this.cadastroForm = this.formBuilder.group({
       id: this.formBuilder.control(""),
       nome: this.formBuilder.control("", Validators.required),
@@ -42,12 +43,13 @@ export class MeusPetsComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
   public toggle() {
     this.dropdownToggle = !this.dropdownToggle
   }
 
   public getIdade(idade: number) {
-    return `${idade} ${idade == 1 ? "ano" : "anos"}`
+    return `${idade} ${idade === 1 ? "ano" : "anos"}`
   }
 
   public showDialog(pet: Pet) {
@@ -56,28 +58,28 @@ export class MeusPetsComponent implements OnInit {
   }
 
   public getNomePet(): string {
-    return this.cadastroForm.get("nome").value
+    return this.cadastroForm.get("nome")?.value as string
   }
 
   preencherEdit(pet: Pet) {
-    this.cadastroForm.get("id").setValue(pet.idPet)
-    this.cadastroForm.get("nome").setValue(pet.nmPet)
-    this.cadastroForm.get("raca").setValue(pet.racaPet)
-    this.cadastroForm.get("observacoes").setValue(pet.obsPet)
-    this.cadastroForm.get("tipo").setValue(pet.tipoPet)
-    this.cadastroForm.get("age").setValue(pet.idadePet)
+    this.cadastroForm.get("id")?.setValue(pet.idPet)
+    this.cadastroForm.get("nome")?.setValue(pet.nmPet)
+    this.cadastroForm.get("raca")?.setValue(pet.racaPet)
+    this.cadastroForm.get("observacoes")?.setValue(pet.obsPet)
+    this.cadastroForm.get("tipo")?.setValue(pet.tipoPet)
+    this.cadastroForm.get("age")?.setValue(pet.idadePet)
   }
 
   public onEdit() {
-    const id = this.cadastroForm.get("id").value
-    const name = this.cadastroForm.get("nome").value
-    const type = this.cadastroForm.get("tipo").value
-    const race = this.cadastroForm.get("raca").value
-    const observations = this.cadastroForm.get("observacoes").value
-    const age = this.cadastroForm.get("age").value || 3
+    const id = this.cadastroForm.get("id")?.value
+    const name = this.cadastroForm.get("nome")?.value
+    const type = this.cadastroForm.get("tipo")?.value
+    const race = this.cadastroForm.get("raca")?.value
+    const observations = this.cadastroForm.get("observacoes")?.value
+    const age = this.cadastroForm.get("age")?.value || 3
 
-    let newPet = new Pet(id, age, name, race, observations, type);
-    console.log(newPet);
+    const newPet = new Pet(id, age, name, race, observations, type)
+    console.log(newPet)
 
     // Logica para edição no banco
   }

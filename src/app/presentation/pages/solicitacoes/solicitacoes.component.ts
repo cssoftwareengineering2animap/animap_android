@@ -1,7 +1,9 @@
 import { Component, OnInit } from "@angular/core"
 import { faBars } from "@fortawesome/free-solid-svg-icons"
 import { ConfirmationService } from "primeng/api"
-import { Solicitacao } from "./models/solicitacao.model"
+import { Tour, TourStatus } from "src/app/domain/entities"
+import { AcceptTourUseCase } from "src/app/domain/use_cases/tour/accept_tour/accept_tour_use_case"
+import { GetTourFeedUseCase } from "src/app/domain/use_cases/tour/get_tour_feed/get_tour_feed_use_case"
 
 @Component({
   selector: "app-solicitacoes",
@@ -9,31 +11,38 @@ import { Solicitacao } from "./models/solicitacao.model"
   styleUrls: ["./solicitacoes.component.scss"],
 })
 export class SolicitacoesComponent implements OnInit {
-  public solicitacoes: Solicitacao[]
+  public solicitacoes: Tour[]
 
   faBars = faBars
+
   public dropdownToggle = false
 
-  constructor(private confirmationService: ConfirmationService) {
-    this.solicitacoes = [
-      new Solicitacao(1, "Bidu", "Ana"),
-      new Solicitacao(1, "Romeu", "Bruno"),
-      new Solicitacao(3, "Branca", "Carol"),
-    ]
-  }
+  constructor(
+    private confirmationService: ConfirmationService,
+    private readonly getTours: GetTourFeedUseCase,
+    private readonly acceptTour: AcceptTourUseCase
+  ) {}
 
-  confirm(nomeAnfitriao: string) {
+  confirm(tour: Tour) {
     this.confirmationService.confirm({
-      message: `Deseja aceitar a solicitação de ${nomeAnfitriao}?`,
+      message: `Deseja aceitar a solicitação de ${tour.host.name}?`,
       acceptLabel: "Sim",
       rejectLabel: "Não",
-      accept: () => {
-        //Actual logic to perform a confirmation
-      },
+      accept: () =>
+        this.acceptTour.execute(tour).subscribe(() => {
+          this.solicitacoes = this.solicitacoes.filter(t => t.id !== tour.id)
+        }),
     })
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getTours
+      .execute({ status: TourStatus.pending })
+      .subscribe(({ data: tours }) => {
+        this.solicitacoes = tours
+      })
+  }
+
   public toggle() {
     this.dropdownToggle = !this.dropdownToggle
   }

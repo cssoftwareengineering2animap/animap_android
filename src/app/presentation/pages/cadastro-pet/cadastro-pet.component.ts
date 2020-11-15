@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core"
 import { FormBuilder, FormGroup, Validators } from "@angular/forms"
 import { faImage, faPaw } from "@fortawesome/free-solid-svg-icons"
 import { Router } from "@angular/router"
+import { Camera, CameraOptions } from "@ionic-native/camera/ngx"
+import base64ToBlob from "b64-to-blob"
 import { CreatePetUseCase } from "../../../domain/use_cases/pet/create_pet/create_pet_use_case"
 import { Failure } from "../../../core/types/failure"
 
@@ -15,18 +17,19 @@ export class CadastroPetComponent implements OnInit {
 
   faPaw = faPaw
 
-  url = "../../../../assets/imagens/upload-icon.png"
-
   animais = ["Cachorro", "Gato"]
 
   public cadastroForm: FormGroup
 
   errorMessage = ""
 
+  base64PetPhoto = ""
+
   constructor(
-    private formBuilder: FormBuilder,
-    private route: Router,
-    private readonly createPetUseCase: CreatePetUseCase
+    private readonly formBuilder: FormBuilder,
+    private readonly route: Router,
+    private readonly createPetUseCase: CreatePetUseCase,
+    private readonly camera: Camera
   ) {}
 
   ngOnInit(): void {
@@ -36,25 +39,52 @@ export class CadastroPetComponent implements OnInit {
       raca: this.formBuilder.control(""),
       observacoes: this.formBuilder.control(""),
       age: this.formBuilder.control(""),
-      urlFoto: this.formBuilder.control(""),
     })
     this.addClass()
   }
 
-  onSubmit() {
-    const name = this.cadastroForm.get("nome").value
-    const type = this.cadastroForm.get("tipo").value
-    const race = this.cadastroForm.get("raca").value
-    const observations = this.cadastroForm.get("observacoes").value
-    const age = this.cadastroForm.get("age").value || 3
+  getPetPhoto = async () => {
+    const options: CameraOptions = {
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+    }
 
-    const urlFoto = this.cadastroForm.get("urlFoto").value // add back-end
-    console.log(urlFoto)
-    console.log(" aaaaaa", this.cadastroForm.get("urlFoto"))
+    this.base64PetPhoto = await this.camera
+      .getPicture(options)
+      .then(this.addBase64ImagePrefix)
+  }
+
+  private addBase64ImagePrefix = (base64Image: string) =>
+    `data:image/jpeg;base64,${base64Image}`
+
+  private getFormDataWithPetPhoto = () => {
+    const blob = base64ToBlob(this.base64PetPhoto)
+
+    const formData = new FormData()
+
+    formData.append("file", blob)
+
+    return formData
+  }
+
+  onSubmit() {
+    const name = this.cadastroForm.get("nome")?.value
+    const type = this.cadastroForm.get("tipo")?.value
+    const race = this.cadastroForm.get("raca")?.value
+    const observations = this.cadastroForm.get("observacoes")?.value
+    const age = this.cadastroForm.get("age")?.value || 3
+
     this.createPetUseCase
-      .execute({ name, type, race, observations, age })
+      .execute({
+        name,
+        type,
+        race,
+        observations,
+        age,
+        photo: this.getFormDataWithPetPhoto(),
+      })
       .subscribe(
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         _pet => this.route.navigate(["/home"]),
         ([error]: Failure[]) => {
           this.errorMessage = error.message
@@ -62,17 +92,13 @@ export class CadastroPetComponent implements OnInit {
       )
   }
 
-  onFileChange(event) {
-    if (event.target.files) {
-      const reader = new FileReader()
-      reader.readAsDataURL(event.target.files[0])
-      reader.onload = (event: any) => {
-        this.url = event.target.result
-      }
-    }
-  }
-
   addClass() {
-    document.querySelector("body").style.background = "#fff"
+    const body = document.querySelector("body")
+
+    if (!body) {
+      return
+    }
+
+    body.style.background = "#fff"
   }
 }

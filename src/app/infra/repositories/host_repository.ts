@@ -4,8 +4,8 @@ import { from } from "rxjs"
 import { flatMap } from "rxjs/operators"
 import { environment } from "../../../environments/environment"
 import { Envelope } from "../../core/types/envelope"
-import { BankAccount } from "../../domain/entities/bank_account_entity"
-import { Host } from "../../domain/entities/host_entity"
+import { BankAccount } from "../../domain/entities/bank_account"
+import { Host } from "../../domain/entities/host"
 import { StorageToken, Storage } from "../../domain/providers/storage"
 import { HostRepository } from "../../domain/repositories/host_repository"
 import {
@@ -30,7 +30,8 @@ export class RemoteHostRepository implements HostRepository {
         this.http.post<Envelope<BankAccount>>(
           `${environment.apiUrl}/bank_accounts`,
           data,
-          { headers: { Authorization: token } }
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          { headers: { Authorization: token! } }
         )
       )
     )
@@ -41,7 +42,8 @@ export class RemoteHostRepository implements HostRepository {
         this.http.post<void>(
           `${environment.apiUrl}/hosts/${hostId}/blockings`,
           {},
-          { headers: { Authorization: token } }
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          { headers: { Authorization: token! } }
         )
       )
     )

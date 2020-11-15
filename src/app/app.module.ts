@@ -14,6 +14,8 @@ import { ConfirmationService } from "primeng/api"
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome"
 import { NativeStorage } from "@ionic-native/native-storage/ngx"
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations"
+import { File } from "@ionic-native/file/ngx"
+import { Camera } from "@ionic-native/camera/ngx"
 import { AppComponent } from "./app.component"
 import { AppRoutingModule } from "./app-routing.module"
 import { StorageToken } from "./domain/providers/storage"
@@ -85,6 +87,8 @@ import { RegisterUserComponent } from "./presentation/pages/user/register/regist
     NgbModule,
   ],
   providers: [
+    File,
+    Camera,
     NativeStorage,
     StatusBar,
     SplashScreen,
@@ -103,6 +107,7 @@ import { RegisterUserComponent } from "./presentation/pages/user/register/regist
     CreateHostUseCase,
     GetTourFeedUseCase,
     BlockHostUseCase,
+    GetTourFeedUseCase,
     { provide: UserRepositoryToken, useClass: RemoteUserRepository },
     { provide: StorageToken, useClass: NativeStorageProvider },
     { provide: PetRepositoryToken, useClass: RemotePetRepository },
