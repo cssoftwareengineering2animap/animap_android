@@ -50,6 +50,7 @@ import { RequestForgotPasswordComponent } from "./presentation/pages/user/forgot
 import { ResetPasswordComponent } from "./presentation/pages/user/forgot-password/reset-password/reset-password.component"
 import { LoginComponent } from "./presentation/pages/user/login/login.component"
 import { RegisterUserComponent } from "./presentation/pages/user/register/register.component"
+import { AcceptTourUseCase } from "./domain/use_cases/tour/accept_tour/accept_tour_use_case"
 
 @NgModule({
   entryComponents: [],
@@ -108,6 +109,7 @@ import { RegisterUserComponent } from "./presentation/pages/user/register/regist
     GetTourFeedUseCase,
     BlockHostUseCase,
     GetTourFeedUseCase,
+    AcceptTourUseCase,
     { provide: UserRepositoryToken, useClass: RemoteUserRepository },
     { provide: StorageToken, useClass: NativeStorageProvider },
     { provide: PetRepositoryToken, useClass: RemotePetRepository },
