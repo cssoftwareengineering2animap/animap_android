@@ -47,8 +47,9 @@ export class RemoteTourRepository implements TourRepository {
   acceptTour = (tour: Tour) =>
     from(this.storage.get<string>("token")).pipe(
       flatMap(token =>
-        this.http.get<Envelope<Tour>>(
+        this.http.post<Envelope<Tour>>(
           `${environment.apiUrl}/tours/${tour.id}/accepted_tours`,
+          {},
           {
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             headers: { Authorization: token },
