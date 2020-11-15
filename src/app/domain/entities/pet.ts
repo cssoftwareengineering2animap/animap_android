@@ -1,5 +1,5 @@
 import { Entity } from "./entity"
-import { User } from "./user_entity"
+import { User } from "./user"
 
 export interface Pet extends Entity {
   name: string

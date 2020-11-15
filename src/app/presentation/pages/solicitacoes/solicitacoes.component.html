@@ -17,15 +17,30 @@
 
   <div class="pets">
     <div id="list-example d-flex flex-column" class="list-group mt-1">
-      <a *ngFor="let solicitacao of solicitacoes" class="list-group-item list-group-item-action align-self-center my-1 p-1" (click)="confirm(solicitacao?.nmAnfitriao)">
+      <a
+        *ngFor="let solicitacao of solicitacoes"
+        class="list-group-item list-group-item-action align-self-center my-1 p-1"
+        (click)="confirm(solicitacao)"
+      >
         <div class="d-flex text-secondary">
-          <div class="col-3 imagem-animal d-flex justify-content-center m-0 p-0">
-            <div class="imagem d-flex flex-column justify-content-center align-self-center">
-              <span class="text-white">{{solicitacao?.nmPet[0].toUpperCase()}}</span>
+          <div
+            class="col-3 imagem-animal d-flex justify-content-center m-0 p-0"
+          >
+            <div
+              class="imagem d-flex flex-column justify-content-center align-self-center"
+            >
+              <span class="text-white">{{
+                solicitacao.pet.name.toUpperCase()
+              }}</span>
             </div>
           </div>
           <div class="d-flex flex-column text-center solicitacao-mensagem">
-            <span><span class="text-primary">{{solicitacao?.nmAnfitriao}}</span> que passear com <span class="text-warning">{{solicitacao?.nmPet}}</span>.</span>
+            <span
+              ><span class="text-primary">{{ solicitacao.host.name }}</span>
+              quer passear com
+              <span class="text-warning">{{ solicitacao.pet.name }}</span
+              >.</span
+            >
           </div>
         </div>
       </a>
@@ -33,5 +48,7 @@
   </div>
 </div>
 
-<p-confirmDialog header="Aceitar Solicitação" icon="pi pi-exclamation-triangle"></p-confirmDialog>
-
+<p-confirmDialog
+  header="Aceitar Solicitação"
+  icon="pi pi-exclamation-triangle"
+></p-confirmDialog>

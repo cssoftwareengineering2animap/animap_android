@@ -17,8 +17,6 @@ export class CadastroPetComponent implements OnInit {
 
   faPaw = faPaw
 
-  url = "../../../../assets/imagens/upload-icon.png"
-
   animais = ["Cachorro", "Gato"]
 
   public cadastroForm: FormGroup

@@ -107,6 +107,7 @@ import { RegisterUserComponent } from "./presentation/pages/user/register/regist
     CreateHostUseCase,
     GetTourFeedUseCase,
     BlockHostUseCase,
+    GetTourFeedUseCase,
     { provide: UserRepositoryToken, useClass: RemoteUserRepository },
     { provide: StorageToken, useClass: NativeStorageProvider },
     { provide: PetRepositoryToken, useClass: RemotePetRepository },

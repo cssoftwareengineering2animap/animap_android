@@ -17,8 +17,6 @@ export class LoginComponent implements OnInit {
 
   public existeUsuario: boolean
 
-  public clicked = false
-
   public pesquisando = false
 
   constructor(
@@ -44,10 +42,6 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  clickedToFalse() {
-    this.clicked = false
-  }
-
   addOrangeBackground() {
     const body = document.querySelector("body")
 
@@ -65,6 +59,7 @@ export class LoginComponent implements OnInit {
     this.loginUseCase.execute({ email, password }).subscribe(
       () => this.route.navigate(["/home"]),
       ([error]: Failure[]) => {
+        console.log("aaaa", error)
         this.errorMessage = error.message
       }
     )

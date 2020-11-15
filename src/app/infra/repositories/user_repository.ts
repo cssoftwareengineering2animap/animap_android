@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http"
 import { Injectable } from "@angular/core"
-import { User } from "../../domain/entities/user_entity"
+import { User } from "../../domain/entities/user"
 import { Envelope } from "../../core/types/envelope"
 import { environment } from "../../../environments/environment"
 import {

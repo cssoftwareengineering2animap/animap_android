@@ -20,7 +20,6 @@
     >
       <div class="form-group">
         <input
-          (focus)="clickedToFalse()"
           class="form-control w-75 mx-auto"
           type="email"
           placeholder="E-mail"
@@ -30,7 +29,6 @@
       </div>
       <div class="form-group">
         <input
-          (focus)="clickedToFalse()"
           class="form-control w-75 mx-auto"
           type="password"
           placeholder="Senha"
@@ -48,10 +46,7 @@
     </form>
   </div>
 
-  <div
-    *ngIf="clicked && errorMessage"
-    class="alert alert-danger text-center mt-3"
-  >
+  <div *ngIf="errorMessage" class="alert alert-danger text-center mt-3">
     <div>{{ errorMessage }}</div>
   </div>
 

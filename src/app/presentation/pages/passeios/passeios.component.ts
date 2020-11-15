@@ -4,8 +4,8 @@ import { faBars, faBan, faComment } from "@fortawesome/free-solid-svg-icons"
 import { GetTourFeedUseCase } from "../../../domain/use_cases/tour/get_tour_feed/get_tour_feed_use_case"
 import { TourFeed } from "../../../domain/repositories/tour_repository"
 import { BlockHostUseCase } from "../../../domain/use_cases/host/block_host/block_host_use_case"
-import { Host } from "../../../domain/entities/host_entity"
-import { TourStatus } from "../../../domain/entities/tour_entity"
+import { Host } from "../../../domain/entities/host"
+import { TourStatus } from "../../../domain/entities"
 
 @Component({
   selector: "app-passeios",

@@ -15,7 +15,7 @@
   "rules": {
     "@typescript-eslint/no-misused-promises": "off",
     "no-restricted-syntax": "off",
-    "@typescript-eslint/no-floating-promises": "error",
+    "@typescript-eslint/no-floating-promises": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/require-await": "off",
     "no-shadow": "off",

@@ -5,7 +5,7 @@ import {
 } from "../../../repositories/tour_repository"
 
 @Injectable()
-export class GetTourFeedUseCase {
+export class GetTours {
   constructor(
     @Inject(TourRepositoryToken)
     private readonly tourRepository: TourRepository

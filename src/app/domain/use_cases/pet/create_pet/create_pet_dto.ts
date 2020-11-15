@@ -1,4 +1,4 @@
-import { Pet } from "../../../entities/pet_entity"
+import { Pet } from "../../../entities/pet"
 
 export type CreatePetDto = Pick<
   Pet,
